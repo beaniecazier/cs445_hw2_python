@@ -94,8 +94,9 @@ class neural_net:
 			self.BackwardPropigate(inputs)
 		return
 
-	def Predict(self, target):
+	def Predict(self, data, target):
 		self.BuildTarget(target)
+		self.ForwardPropigate(data)
 		return
 
 	def ConfusionMatrix(self, predictions, targets):
