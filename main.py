@@ -1,101 +1,180 @@
-#!/usr/bin/python
+# Design Unit/Module: Multiclass Perceptron
+# File Name: main.py
+# Description: Use the MNIST data set to train and test a network of 10 perceptrons.
+# Assumptions: First entry in each row contains target class
+# Limitations: None?
+# System: any(Python)
+# Author: Preston Cazier
+# Course: CS 445 Machine Learning (Winter 2019)
+# Assignment: Homework 1
+# Revision: 1.0 03/1/2019
 
-import sys
-import neural_net
-
+from neural_net import neural_net
 import numpy as np
 import pandas as pd
 
-test_file = ''
-train_file = ''
-confmat_file = ''
-accarr_file = ''
+# initialize hyperparameter variables
+EPOCHS = 50
+INPUT_MAX = 255
+LRATE = 0.1
+MOMENTUM = [.9, 0.0, 0.5, 1.0]
+NUMCLASSES = 10
+NUMHIDDEN = [10,20,100]
+VERBOSE = False
+TRAIN_FILE = "mnist_train.csv"
+TEST_FILE = "mnist_test.csv"
 
-# #csv to df
-trainingset = pd.read_csv("test.csv", header=None)
-# testset = pd.read_csv("", header=None)
-# #extract the first column as targets
-# #replace first column with 255
-# #preprocess by dividing by 255
-# train_data.drop(columns=0)     # Remove column with target info
+# set up Accuracy recording
+Accuracy = pd.DataFrame(0.0, index=range(
+	0, EPOCHS+1), columns=['test', 'train'])
 
-# def LoadData():
-#     return
+# set up confusion matrix: rows=actual, col=predicted
+confmat_train = pd.DataFrame(0, index=range(0, 10), columns=range(0, 10))
+confmat_test = pd.DataFrame(0, index=range(0, 10), columns=range(0, 10))
 
-# def RunSimulation():
-#     return
-
-#argument options are 
-# -i for input training csv file name
-# -t for test csv set
-# -a for output csv accuracy file
-# -o for output file name
-# -m for num of processes to use
-# -h for csv file with hyperparameters(has header line)
-if __name__ == "__main__":
-	#print 'Number of arguments:', len(sys.argv), 'arguments.'
-	#print 'Argument List:', str(sys.argv)
-	print(type(trainingset))
-	print(trainingset[0])
-	for arg in sys.argv:
-		if arg == 'HELP':
-			Help()
-			sys.exit()
-
-	try:
-		opts, args = getopt.getopt(argv, "hiotam")
-	except:
-		Help()
-		sys.exit(2)
-
-	for opt, arg in opts:
-		if opt == '-h':
-			SetHyperparamters(pd.read_csv(arg))
-		elif opt == '-i':
-		elif opt == '-o':
-		elif opt == '-t':
-		elif opt == '-a':
-		elif opt == '-m':
-		
-	pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# output = [None]*10 # used to store outputs and evaluate the prediction of network
-# accuracy = pandas.DataFrame(0,index=range(0,EPOCH_MAX+1),columns=['test_c','test_i','train_c','train_i'])
-
-# # set up confusion matrix: rows=actual, col=predicted
-# confu  = pandas.DataFrame(0,index=range(0,10),columns=range(0,10)) 
-
-# # Import data
-# train_data = pandas.read_csv(TRAIN_FILE,header=None)
-# test_data  = pandas.read_csv(TEST_FILE ,header=None)
-
+# load data
+train_data = pd.read_csv(TRAIN_FILE, header=None)
+test_data = pd.read_csv(TEST_FILE, header=None).values
 # # Preprocess data 
-# train_data.sample(frac=1)      # shuffle training data
-# train_target = train_data[0].values # Save targets as a separate dataframe/array
-# train_data.drop(columns=0)     # Remove column with target info
-# train_data = train_data.values # convert to numpy array
-# train_data = numpy.divide(train_data, INPUT_MAX) # scale inputs between 0 and 1 by dividing by input max value
+train_data.sample(frac=1)      # shuffle training data
+if VERBOSE:
+    print('now randomizing the training data and separating out the targets')
 
-# test_target = test_data[0].values # Save targets as a separate dataframe/array
-# test_data.drop(columns=0)    # Remove column with target info
-# test_data = test_data.values # convert to numpy array
-# test_data = numpy.divide(test_data, INPUT_MAX)
+# Save targets as a separate dataframe/array
+target_train = train_data[:, 0]
+train_data = np.array(train_data)
+train_data[:, 0] = INPUT_MAX
+if VERBOSE:
+    print('training data targets:')
+    print(target_train)
+    print('training data:')
+    print(train_data)
+    print('the shape of this set of data is:')
+    print(train_data.shape)
+    print('now separating out the targets from the testing data')
+target_test = test_data[:, 0]
+test_data = np.array(test_data)
+test_data[:, 0] = INPUT_MAX
+if VERBOSE:
+    print('testing data targets:')
+    print(target_test)
+    print('testing data:')
+    print(test_data)
+    print('the shape of this set of data is:')
+    print(test_data.shape)
 
-# input_size = len(train_data[0]) # how many inputs are there
+input_size = len(train_data[0])  # how many inputs are there
+if VERBOSE:
+    print('the number of inputs is:', input_size)
+
+# Preprocess data
+train_data = np.divide(train_data, INPUT_MAX)
+if VERBOSE:
+    print('training data after preprocessing')
+    print(train_data)
+test_data = np.divide(test_data, INPUT_MAX)
+if VERBOSE:
+    print('testing data after preprocessing')
+    print(test_data)
+
+for i in range(len(NUMHIDDEN)):
+	print('Starting Experiment 1 with ', NUMHIDDEN[i], ' hidden units')
+	# initialize neural network
+	network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[i], numinputs=input_size,
+						momentum=MOMENTUM[0], lrate=LRATE, verbose=VERBOSE)
+	
+	for j in range(1, EPOCHS+1):
+		print('starting epoch ', j)
+		for k in range(len(train_data)):
+			network.Train(train_data[k], target_train[k])
+		print('finding Accuracy')
+		Accuracy['test'][j] = network.Accuracy(test_data, target_test)
+		Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+
+	# Generate the final confusion matrices and print the data
+	confmat_test = network.ConfusionMatrix(network.Predict(test_data), target_test)
+	confmat_train = network.ConfusionMatrix(network.Predict(train_data), target_train)
+	Accuracy['test'].to_csv('acc_test_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
+	Accuracy['train'].to_csv('acc_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
+	pd.DataFrame(confmat_train).to_csv('confmat_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
+	pd.DataFrame(confmat_test).to_csv('confmat_test_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
+
+
+for i in range(1, len(NUMHIDDEN)):
+	print('Starting Experiment 2 with a momentum of ', MOMENTUM[i])
+	# initialize neural network
+	network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[2], numinputs=input_size,
+                      momentum=MOMENTUM[i], lrate=LRATE, verbose=VERBOSE)
+
+	for j in range(1, EPOCHS+1):
+		print('starting epoch ', j)
+		for k in range(len(train_data)):
+			network.Train(train_data[k], target_train[k])
+		print('finding Accuracy')
+		Accuracy['test'][j] = network.Accuracy(test_data, target_test)
+		Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+
+	# Generate the final confusion matrices and print the data
+	confmat_test = network.ConfusionMatrix(
+	    network.Predict(test_data), target_test)
+	confmat_train = network.ConfusionMatrix(
+	    network.Predict(train_data), target_train)
+	Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+	Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+	pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
+                                    str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+	pd.DataFrame(confmat_test).to_csv('confmat_test_m' +
+                                   str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+
+# create a quarter slice of data
+#create a half slice of data
+
+print('Starting Experiment 3 with a quarter of the data')
+# initialize neural network
+network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[2], numinputs=input_size,
+					momentum=MOMENTUM[i], lrate=LRATE, verbose=VERBOSE)
+
+for j in range(1, EPOCHS+1):
+	print('starting epoch ', j)
+	for k in range(len(train_data)):
+		network.Train(train_data[k], target_train[k])
+	print('finding Accuracy')
+	Accuracy['test'][j] = network.Accuracy(test_data, target_test)
+	Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+
+# Generate the final confusion matrices and print the data
+confmat_test = network.ConfusionMatrix(
+	network.Predict(test_data), target_test)
+confmat_train = network.ConfusionMatrix(
+	network.Predict(train_data), target_train)
+Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
+								str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+pd.DataFrame(confmat_test).to_csv('confmat_test_m' +
+                                  str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+
+print('Starting Experiment 3 with half of the data')
+# initialize neural network
+network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[2], numinputs=input_size,
+                     momentum=MOMENTUM[i], lrate=LRATE, verbose=VERBOSE)
+
+for j in range(1, EPOCHS+1):
+	print('starting epoch ', j)
+	for k in range(len(train_data)):
+		network.Train(train_data[k], target_train[k])
+	print('finding Accuracy')
+	Accuracy['test'][j] = network.Accuracy(test_data, target_test)
+	Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+
+# Generate the final confusion matrices and print the data
+confmat_test = network.ConfusionMatrix(
+	network.Predict(test_data), target_test)
+confmat_train = network.ConfusionMatrix(
+	network.Predict(train_data), target_train)
+Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
+                                   str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
+pd.DataFrame(confmat_test).to_csv('confmat_test_m' +
+                                  str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')

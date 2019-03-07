@@ -11,6 +11,8 @@ import pandas as pd
 import numpy as np
 import math
 
+WEIGHT_MIN = -0.05
+WEIGHT_MAX = 0.05
 
 def oneminus(x): 
 	return 1-x
@@ -19,16 +21,16 @@ def sigmoid(x):
 	return 1 / (1 + math.exp(-x))
 
 class neural_net:
-	def __init__(self, hyperparameters):
+	def __init__(self, numclasses, numhidden, numinputs, momentum, lrate, verbose):
 		# hyperparameters
-		self.verbose = hyperparameters.verbose
-		self.lrate = hyperparameters.lrate
-		self.momentum = hyperparameters.momentum
-		self.minweight = hyperparameters.minweight
-		self.maxweight = hyperparameters.maxweight
-		self.k = hyperparameters.numclasses
-		self.j = hyperparameters.numhidden
-		self.i = hyperparameters.numinputs
+		self.verbose = verbose
+		self.lrate = lrate
+		self.momentum = momentum
+		self.minweight = WEIGHT_MIN
+		self.maxweight = WEIGHT_MAX
+		self.k = numclasses
+		self.j = numhidden
+		self.i = numinputs
 
 		# activation vectors
 		self.hiddenacts = np.zeros(self.j+1)
@@ -36,8 +38,8 @@ class neural_net:
 		self.outputs = np.zeros(self.k)
 
 		# weight matrices
-		self.hiddenweights = np.random.rand(self.j+1, self.i+1)
-		self.outputweights = np.random.rand(self.k, self.j+1)
+		self.hiddenweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.j+1, self.i+1))
+		self.outputweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.k, self.j+1))
 		self.deltaWj = np.zeros((self.j+1, self.i+1))
 		self.deltaWk = np.zeros((self.k, self.j+1))
 
@@ -94,4 +96,10 @@ class neural_net:
 
 	def Predict(self, target):
 		self.BuildTarget(target)
+		return
+
+	def ConfusionMatrix(self, predictions, targets):
+		return
+
+	def Accuracy(self, data, targets):
 		return
