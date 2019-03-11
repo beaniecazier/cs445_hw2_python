@@ -47,14 +47,6 @@ class neural_net:
 		self.targets = np.zeros(self.k)
 		return
 
-	def ForwardPropigate(self, inputs):
-		self.hiddenacts = map(sigmoid, np.matmul(a=self.hiddenweights, b=inputs))
-		self.outputs = map(sigmoid, np.matmul(a=self.outputweights, b=self.hiddenacts))
-		if self.verbose:
-			print(self.hiddenacts)
-			print(self.outputs)
-		return
-
 	def BackwardPropigate(self, inputs):
 		# determine output errors terms
 		kerror = np.multiply(map(oneminus, self.outputs), np.multiply(self.targets - self.outputs))
@@ -89,19 +81,56 @@ class neural_net:
 		return
 
 	def Train(self, data, target):
+        if self.verbose:
+            print('\n+++++++++++++++++++++++++++++++')
+            print('Now training on ')
+            print(inputs)
 		self.BuildTarget(target)
-		for inputs in data:
-			self.ForwardPropigate(inputs)
-			self.BackwardPropigate(inputs)
+		self.Predict(inputs)
+		self.BackwardPropigate(inputs)
+        if self.verbose:
+            print('to be updated to:')
+            print(self.weights)
+            print('+++++++++++++++++++++++++++++++\n')
 		return
 
-	def Predict(self, data, target):
-		self.BuildTarget(target)
-		self.ForwardPropigate(data)
+	def Predict(self, data):
+        if self.verbose:
+            print('\n******************************')
+        inputs = np.array(data)
+        if self.verbose:
+            print('the length of inputs is ', data.shape)
+		self.hiddenacts = map(sigmoid, np.matmul(a=self.hiddenweights, b=inputs))
+		self.outputs = map(sigmoid, np.matmul(
+			a=self.outputweights, b=self.hiddenacts))
+        if self.verbose:
+            print('by using the following input,')
+            print(data)
+			print(self.hiddenacts)
+            print('the network predicted the following:')
+			print(self.outputs)
+            print('******************************\n')
 		return
 
 	def ConfusionMatrix(self, predictions, targets):
 		return
 
 	def Accuracy(self, data, targets):
-		return
+        if self.verbose:
+            print('\n///////////////////////////////')
+            print('Now calculating the accuracy of the network on the following data:')
+            print(data)
+            print('compared to this target array')
+            print(targets)
+        self.predict(data)
+        self.confusionmatrix(predictions, targets)
+        # sum diagonal to get accuracy
+        total = 0
+        for i in range(self.numclass):
+            total += self.confmat[i][i]
+        acc = total / len(data)
+        if self.verbose:
+            print('this gives tp count of ', total, 'out of ',
+                  len(data), 'for an accuracy of ', acc)
+            print('///////////////////////////////\n')
+        return acc

@@ -35,8 +35,8 @@ confmat_test = pd.DataFrame(0, index=range(0, 10), columns=range(0, 10))
 # load data
 train_data = pd.read_csv(TRAIN_FILE, header=None)
 test_data = pd.read_csv(TEST_FILE, header=None).values
-# # Preprocess data 
-train_data.sample(frac=1)      # shuffle training data
+# # Preprocess data
+train_data = train_data.sample(frac=1).values
 if VERBOSE:
     print('now randomizing the training data and separating out the targets')
 
