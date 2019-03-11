@@ -39,6 +39,7 @@ class neural_net:
 
 		# weight matrices
 		self.hiddenweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.j+1, self.i+1))
+		print(self.hiddenweights.shape)
 		self.outputweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.k, self.j+1))
 		self.deltaWj = np.zeros((self.j+1, self.i+1))
 		self.deltaWk = np.zeros((self.k, self.j+1))

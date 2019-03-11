@@ -21,8 +21,8 @@ MOMENTUM = [.9, 0.0, 0.5, 1.0]
 NUMCLASSES = 10
 NUMHIDDEN = [10,20,100]
 VERBOSE = False
-TRAIN_FILE = "mnist_train.csv"
-TEST_FILE = "mnist_test.csv"
+TRAIN_FILE = "train.csv"
+TEST_FILE = "test.csv"
 
 # set up Accuracy recording
 Accuracy = pd.DataFrame(0.0, index=range(
@@ -41,23 +41,23 @@ if VERBOSE:
     print('now randomizing the training data and separating out the targets')
 
 # Save targets as a separate dataframe/array
-target_train = train_data[:, 0]
+train_target = train_data[:, 0]
 train_data = np.array(train_data)
 train_data[:, 0] = INPUT_MAX
 if VERBOSE:
     print('training data targets:')
-    print(target_train)
+    print(train_target)
     print('training data:')
     print(train_data)
     print('the shape of this set of data is:')
     print(train_data.shape)
     print('now separating out the targets from the testing data')
-target_test = test_data[:, 0]
+test_target = test_data[:, 0]
 test_data = np.array(test_data)
 test_data[:, 0] = INPUT_MAX
 if VERBOSE:
     print('testing data targets:')
-    print(target_test)
+    print(test_target)
     print('testing data:')
     print(test_data)
     print('the shape of this set of data is:')
@@ -86,14 +86,14 @@ for i in range(len(NUMHIDDEN)):
 	for j in range(1, EPOCHS+1):
 		print('starting epoch ', j)
 		for k in range(len(train_data)):
-			network.Train(train_data[k], target_train[k])
+			network.Train(train_data[k], train_target[k])
 		print('finding Accuracy')
-		Accuracy['test'][j] = network.Accuracy(test_data, target_test)
-		Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+		Accuracy['test'][j] = network.Accuracy(test_data, test_target)
+		Accuracy['train'][j] = network.Accuracy(train_data, train_target)
 
 	# Generate the final confusion matrices and print the data
-	confmat_test = network.ConfusionMatrix(network.Predict(test_data), target_test)
-	confmat_train = network.ConfusionMatrix(network.Predict(train_data), target_train)
+	confmat_test = network.ConfusionMatrix(network.Predict(test_data, test_target), test_target)
+	confmat_train = network.ConfusionMatrix(network.Predict(train_data, train_target), test_target)
 	Accuracy['test'].to_csv('acc_test_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
 	Accuracy['train'].to_csv('acc_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
 	pd.DataFrame(confmat_train).to_csv('confmat_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
@@ -109,16 +109,16 @@ for i in range(1, len(NUMHIDDEN)):
 	for j in range(1, EPOCHS+1):
 		print('starting epoch ', j)
 		for k in range(len(train_data)):
-			network.Train(train_data[k], target_train[k])
+			network.Train(train_data[k], train_target[k])
 		print('finding Accuracy')
-		Accuracy['test'][j] = network.Accuracy(test_data, target_test)
-		Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+		Accuracy['test'][j] = network.Accuracy(test_data, test_target)
+		Accuracy['train'][j] = network.Accuracy(train_data, train_target)
 
 	# Generate the final confusion matrices and print the data
 	confmat_test = network.ConfusionMatrix(
-	    network.Predict(test_data), target_test)
+	    network.Predict(test_data, test_target), test_target)
 	confmat_train = network.ConfusionMatrix(
-	    network.Predict(train_data), target_train)
+	    network.Predict(train_data, train_target), test_target)
 	Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 	Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 	pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
@@ -137,16 +137,16 @@ network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[2], numinputs=in
 for j in range(1, EPOCHS+1):
 	print('starting epoch ', j)
 	for k in range(len(train_data)):
-		network.Train(train_data[k], target_train[k])
+		network.Train(train_data[k], train_target[k])
 	print('finding Accuracy')
-	Accuracy['test'][j] = network.Accuracy(test_data, target_test)
-	Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+	Accuracy['test'][j] = network.Accuracy(test_data, test_target)
+	Accuracy['train'][j] = network.Accuracy(train_data, train_target)
 
 # Generate the final confusion matrices and print the data
 confmat_test = network.ConfusionMatrix(
-	network.Predict(test_data), target_test)
+	network.Predict(test_data, test_target), test_target)
 confmat_train = network.ConfusionMatrix(
-	network.Predict(train_data), target_train)
+	network.Predict(train_data, train_target), test_target)
 Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
@@ -162,16 +162,16 @@ network = neural_net(numclasses=NUMCLASSES, numhidden=NUMHIDDEN[2], numinputs=in
 for j in range(1, EPOCHS+1):
 	print('starting epoch ', j)
 	for k in range(len(train_data)):
-		network.Train(train_data[k], target_train[k])
+		network.Train(train_data[k], train_target[k])
 	print('finding Accuracy')
-	Accuracy['test'][j] = network.Accuracy(test_data, target_test)
-	Accuracy['train'][j] = network.Accuracy(train_data, target_train)
+	Accuracy['test'][j] = network.Accuracy(test_data, test_target)
+	Accuracy['train'][j] = network.Accuracy(train_data, train_target)
 
 # Generate the final confusion matrices and print the data
 confmat_test = network.ConfusionMatrix(
-	network.Predict(test_data), target_test)
+	network.Predict(test_data, test_target), test_target)
 confmat_train = network.ConfusionMatrix(
-	network.Predict(train_data), target_train)
+	network.Predict(train_data, train_target), test_target)
 Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
