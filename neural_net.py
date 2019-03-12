@@ -24,6 +24,9 @@ class neural_net:
 	def __init__(self, numclasses, numhidden, numinputs, momentum, lrate, verbose):
 		# hyperparameters
 		self.verbose = verbose
+		if self.verbose:
+			print('\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+			print('now initializing the network')
 		self.lrate = lrate
 		self.momentum = momentum
 		self.minweight = WEIGHT_MIN
@@ -31,6 +34,10 @@ class neural_net:
 		self.k = numclasses
 		self.j = numhidden
 		self.i = numinputs
+		if self.verbose:
+			print('The number of inputs to this net is:', self.i)
+			print('The number of hidden units to this net is:', self.j)
+			print('The number of outputs to this net is:', self.k)
 
 		# activation vectors
 		self.hiddenacts = np.zeros(self.j+1)
@@ -39,12 +46,17 @@ class neural_net:
 
 		# weight matrices
 		self.hiddenweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.j+1, self.i+1))
+		self.hiddenweights[0] = np.zeros(self.i+1)
+		self.hiddenweights[0][0] = 1.0
+		print(self.hiddenweights)
 		print(self.hiddenweights.shape)
 		self.outputweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.k, self.j+1))
 		self.deltaWj = np.zeros((self.j+1, self.i+1))
 		self.deltaWk = np.zeros((self.k, self.j+1))
 
 		self.targets = np.zeros(self.k)
+
+		self.confmat = np.zeros(shape=(self.k, self.k))
 		return
 
 	def BackwardPropigate(self, inputs):
@@ -114,7 +126,7 @@ class neural_net:
 		return
 
 	def ConfusionMatrix(self, predictions, targets):
-		return
+		return self.confmat
 
 	def Accuracy(self, data, targets):
 		if self.verbose:
@@ -123,11 +135,11 @@ class neural_net:
 			print(data)
 			print('compared to this target array')
 			print(targets)
-		self.predict(data)
-		self.confusionmatrix(predictions, targets)
+		self.Predict(data)
+		self.ConfusionMatrix(self.outputs, targets)
 		# sum diagonal to get accuracy
 		total = 0
-		for i in range(self.numclass):
+		for i in range(self.k):
 			total += self.confmat[i][i]
 		acc = total / len(data)
 		if self.verbose:
