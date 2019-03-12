@@ -1,0 +1,47 @@
+now randomizing the training data and separating out the targets
+training data targets:
+[1 0 1]
+training data:
+[[255   0   1]
+ [255   0   0]
+ [255   1   1]]
+the shape of this set of data is:
+(3, 3)
+now separating out the targets from the testing data
+testing data targets:
+[0 1 1]
+testing data:
+[[255   0   0]
+ [255   0   1]
+ [255   1   1]]
+the shape of this set of data is:
+(3, 3)
+the number of inputs is: 3
+training data after preprocessing
+[[1.         0.         0.00392157]
+ [1.         0.         0.        ]
+ [1.         0.00392157 0.00392157]]
+testing data after preprocessing
+[[1.         0.         0.        ]
+ [1.         0.         0.00392157]
+ [1.         0.00392157 0.00392157]]
+Starting Experiment 1 with  10  hidden units
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+now initializing the network
+[[ 1.          0.          0.        ]
+ [-0.0398406   0.03580722  0.00397298]
+ [-0.04634961  0.04928141  0.01891142]
+ [-0.01135497 -0.03927962 -0.02078941]
+ [ 0.02747382  0.02774119 -0.02453313]
+ [-0.01236495 -0.02312182 -0.03628944]
+ [-0.002138   -0.00804315  0.02571257]
+ [-0.04148386 -0.04837251  0.03468359]
+ [ 0.01447679  0.03021723  0.03774522]
+ [ 0.02467221  0.02546861  0.02934826]
+ [-0.00565171 -0.01439755 -0.03639971]]
+(11, 3)
+the network was initialized with:
+The number of inputs to this net is: 3
+The number of hidden units to this net is: 10
+The number of outputs to this net is: 10

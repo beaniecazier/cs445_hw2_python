@@ -20,7 +20,7 @@ LRATE = 0.1
 MOMENTUM = [.9, 0.0, 0.5, 1.0]
 NUMCLASSES = 10
 NUMHIDDEN = [10,20,100]
-VERBOSE = False
+VERBOSE = True
 TRAIN_FILE = "train.csv"
 TEST_FILE = "test.csv"
 
@@ -92,8 +92,8 @@ for i in range(len(NUMHIDDEN)):
 		Accuracy['train'][j] = network.Accuracy(train_data, train_target)
 
 	# Generate the final confusion matrices and print the data
-	confmat_test = network.ConfusionMatrix(network.Predict(test_data, test_target), test_target)
-	confmat_train = network.ConfusionMatrix(network.Predict(train_data, train_target), test_target)
+	confmat_test = network.ConfusionMatrix(network.Predict(test_data), test_target)
+	confmat_train = network.ConfusionMatrix(network.Predict(train_data), test_target)
 	Accuracy['test'].to_csv('acc_test_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
 	Accuracy['train'].to_csv('acc_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
 	pd.DataFrame(confmat_train).to_csv('confmat_train_'+str(NUMHIDDEN[i])+'_'+str(LRATE)+'.csv')
@@ -116,9 +116,9 @@ for i in range(1, len(NUMHIDDEN)):
 
 	# Generate the final confusion matrices and print the data
 	confmat_test = network.ConfusionMatrix(
-		network.Predict(test_data, test_target), test_target)
+		network.Predict(test_data), test_target)
 	confmat_train = network.ConfusionMatrix(
-		network.Predict(train_data, train_target), test_target)
+		network.Predict(train_data), test_target)
 	Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 	Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 	pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
@@ -144,9 +144,9 @@ for j in range(1, EPOCHS+1):
 
 # Generate the final confusion matrices and print the data
 confmat_test = network.ConfusionMatrix(
-	network.Predict(test_data, test_target), test_target)
+	network.Predict(test_data), test_target)
 confmat_train = network.ConfusionMatrix(
-	network.Predict(train_data, train_target), test_target)
+	network.Predict(train_data), test_target)
 Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 pd.DataFrame(confmat_train).to_csv('confmat_train_m' +
@@ -169,9 +169,9 @@ for j in range(1, EPOCHS+1):
 
 # Generate the final confusion matrices and print the data
 confmat_test = network.ConfusionMatrix(
-	network.Predict(test_data, test_target), test_target)
+	network.Predict(test_data), test_target)
 confmat_train = network.ConfusionMatrix(
-	network.Predict(train_data, train_target), test_target)
+	network.Predict(train_data), test_target)
 Accuracy['test'].to_csv('acc_test_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 Accuracy['train'].to_csv('acc_train_m'+str(MOMENTUM[i])+'_'+str(LRATE)+'.csv')
 pd.DataFrame(confmat_train).to_csv('confmat_train_m' +

@@ -15,10 +15,11 @@ WEIGHT_MIN = -0.05
 WEIGHT_MAX = 0.05
 
 def oneminus(x): 
-	return 1-x
+	ones = np.ones(shape=x.shape)
+	return np.subtract(ones, x)
 
 def sigmoid(x):
-	return 1 / (1 + math.exp(-x))
+	return 1 / (1 + np.exp(-x))
 
 class neural_net:
 	def __init__(self, numclasses, numhidden, numinputs, momentum, lrate, verbose):
@@ -34,10 +35,6 @@ class neural_net:
 		self.k = numclasses
 		self.j = numhidden
 		self.i = numinputs
-		if self.verbose:
-			print('The number of inputs to this net is:', self.i)
-			print('The number of hidden units to this net is:', self.j)
-			print('The number of outputs to this net is:', self.k)
 
 		# activation vectors
 		self.hiddenacts = np.zeros(self.j+1)
@@ -45,43 +42,69 @@ class neural_net:
 		self.outputs = np.zeros(self.k)
 
 		# weight matrices
-		self.hiddenweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.j+1, self.i+1))
-		self.hiddenweights[0] = np.zeros(self.i+1)
+		self.hiddenweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.j+1, self.i))
+		self.hiddenweights[0] = np.zeros(self.i)
 		self.hiddenweights[0][0] = 1.0
 		print(self.hiddenweights)
 		print(self.hiddenweights.shape)
 		self.outputweights = np.random.uniform(low=WEIGHT_MIN, high=WEIGHT_MAX, size=(self.k, self.j+1))
-		self.deltaWj = np.zeros((self.j+1, self.i+1))
+		self.deltaWj = np.zeros((self.j+1, self.i))
 		self.deltaWk = np.zeros((self.k, self.j+1))
 
 		self.targets = np.zeros(self.k)
 
 		self.confmat = np.zeros(shape=(self.k, self.k))
+		if self.verbose:
+			print('the network was initialized with:')
+			print('The number of inputs to this net is:', self.i)
+			print('The number of hidden units to this net is:', self.j)
+			print('The number of outputs to this net is:', self.k)
+			print('and a learning rate of ',self.lrate, ' and a momentum of ', self.momentum)
+			print('the initial weights are:')
+			print('Hidden Weight Matrix')
+			print(self.hiddenweights)
+			print('The size of the hidden weight matrix is: ', self.hiddenweights.shape)
+			print('Output Weight Matrix')
+			print(self.outputweights)
+			print('The size of the hidden weight matrix is: ', self.outputweights.shape)
+			print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n')
 		return
 
-	def BackwardPropigate(self, inputs):
-		# determine output errors terms
-		kerror = np.multiply(map(oneminus, self.outputs), np.multiply(self.targets - self.outputs))
-		kerror = np.multiply(self.outputs, kerror)
+	def Predict(self, data):
+		if self.verbose:
+			print('\n******************************')
+		inputs = np.array(data)
+		if self.verbose:
+			print('the length of inputs is ', data.shape)
+		self.hiddenacts = sigmoid(np.inner(self.hiddenweights, inputs))
+		self.outputs = sigmoid(np.inner(self.outputweights, self.hiddenacts))
+		if self.verbose:
+			print('by using the following input,')
+			print(data)
+			print('the network predicted the following:')
+			print('hidden activations:\n', self.hiddenacts)
+			print('output predictions:\n', self.outputs)
+			print('******************************\n')
+		return
 
-		# determine hidden activation error terms
-		jerror = np.matmul(a=kerror,b=self.outputweights)
-		jerror = np.multiply(map(oneminus, self.hiddenacts), jerror)
-		jerror = np.multiply(self.hiddenacts, kerror)
-
-		# determine delta weights for hidden layer to output
-		kerror = np.multiply(kerror, self.lrate)
-		priordeltaWk = np.multiply(self.deltaWk, self.momentum)
-		self.detlaWk = priordeltaWk + np.outer(a=kerror, b=self.hiddenacts)
-
-		#determine delta weights for input to hidden layer
-		jerror = np.multiply(jerror, self.lrate)
-		priordeltaWj = np.multiply(self.deltaWj, self.momentum)
-		self.detlaWj = priordeltaWj + np.matmul(a=jerror, b=inputs)
-
-		#
-		self.outputweights = self.outputweights + self.detlaWk
-		self.hiddenweights = self.hiddenweights + self.detlaWj
+	def Train(self, data, target):
+		if self.verbose:
+			print('\n+++++++++++++++++++++++++++++++')
+			print('Now training on ')
+			print(data)
+			print('which has a shape of: ', data.shape)
+		self.BuildTarget(target)
+		self.Predict(data)
+		self.BackwardPropigate(data)
+		if self.verbose:
+			print('to be updated to:')
+			print('Hidden Weight Matrix')
+			print(self.hiddenweights)
+			print('The size of the hidden weight matrix is: ', self.hiddenweights.shape)
+			print('Output Weight Matrix')
+			print(self.outputweights)
+			print('The size of the hidden weight matrix is: ', self.outputweights.shape)
+			print('+++++++++++++++++++++++++++++++\n')
 		return
 
 	def BuildTarget(self, target):
@@ -92,37 +115,41 @@ class neural_net:
 				self.targets[i] = 0.1
 		return
 
-	def Train(self, data, target):
+	def BackwardPropigate(self, inputs):
 		if self.verbose:
-			print('\n+++++++++++++++++++++++++++++++')
-			print('Now training on ')
-			print(data)
-		self.BuildTarget(target)
-		self.Predict(data)
-		self.BackwardPropigate(data)
+			print('\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
+		# determine output errors terms
 		if self.verbose:
-			print('to be updated to:')
-			print(self.hiddenweights)
-			print(self.outputweights)
-			print('+++++++++++++++++++++++++++++++\n')
-		return
+			print('now generating the k error term vector')
+			print('the result of the target vector minus the output vector is:')
+		kerror = np.subtract(self.targets, self.outputs)
+		if self.verbose:
+			print('the result of the first element-wise multiplication is:')
+		kerror = np.multiply(oneminus(self.outputs), kerror)
+		if self.verbose:
+			print('the result of the second element-wise multiplication is:')
+		kerror = np.multiply(self.outputs, kerror)
 
-	def Predict(self, data):
+		# determine hidden activation error terms
+		jerror = np.inner(a=kerror,b=self.outputweights)
+		jerror = np.multiply(oneminus(self.hiddenacts), jerror)
+		jerror = np.multiply(self.hiddenacts, kerror)
+
+		# determine delta weights for hidden layer to output
+		kerror = np.multiply(kerror, self.lrate)
+		priordeltaWk = np.multiply(self.deltaWk, self.momentum)
+		self.detlaWk = priordeltaWk + np.outer(kerror, self.hiddenacts)
+
+		#determine delta weights for input to hidden layer
+		jerror = np.multiply(jerror, self.lrate)
+		priordeltaWj = np.multiply(self.deltaWj, self.momentum)
+		self.detlaWj = priordeltaWj + np.outer(jerror, inputs)
+
+		#
+		self.outputweights = self.outputweights + self.detlaWk
+		self.hiddenweights = self.hiddenweights + self.detlaWj
 		if self.verbose:
-			print('\n******************************')
-		inputs = np.array(data)
-		if self.verbose:
-			print('the length of inputs is ', data.shape)
-		self.hiddenacts = map(sigmoid, np.matmul(a=self.hiddenweights, b=inputs))
-		self.outputs = map(sigmoid, np.matmul(
-			a=self.outputweights, b=self.hiddenacts))
-		if self.verbose:
-			print('by using the following input,')
-			print(data)
-			print(self.hiddenacts)
-			print('the network predicted the following:')
-			print(self.outputs)
-			print('******************************\n')
+			print(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n')
 		return
 
 	def ConfusionMatrix(self, predictions, targets):
