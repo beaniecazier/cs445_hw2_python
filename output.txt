@@ -1,47 +1,2487 @@
 now randomizing the training data and separating out the targets
 training data targets:
-[1 0 1]
+[1 1 0]
 training data:
-[[255   0   1]
- [255   0   0]
- [255   1   1]]
+[[2 1 1]
+ [2 0 1]
+ [2 0 0]]
 the shape of this set of data is:
 (3, 3)
 now separating out the targets from the testing data
 testing data targets:
-[0 1 1]
+[0]
 testing data:
-[[255   0   0]
- [255   0   1]
- [255   1   1]]
+[[2 2 0]]
 the shape of this set of data is:
-(3, 3)
+(1, 3)
 the number of inputs is: 3
 training data after preprocessing
-[[1.         0.         0.00392157]
- [1.         0.         0.        ]
- [1.         0.00392157 0.00392157]]
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
 testing data after preprocessing
-[[1.         0.         0.        ]
- [1.         0.         0.00392157]
- [1.         0.00392157 0.00392157]]
-Starting Experiment 1 with  10  hidden units
+[[1. 1. 0.]]
+Starting Experiment 1 with  3  hidden units
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 now initializing the network
-[[ 1.          0.          0.        ]
- [-0.0398406   0.03580722  0.00397298]
- [-0.04634961  0.04928141  0.01891142]
- [-0.01135497 -0.03927962 -0.02078941]
- [ 0.02747382  0.02774119 -0.02453313]
- [-0.01236495 -0.02312182 -0.03628944]
- [-0.002138   -0.00804315  0.02571257]
- [-0.04148386 -0.04837251  0.03468359]
- [ 0.01447679  0.03021723  0.03774522]
- [ 0.02467221  0.02546861  0.02934826]
- [-0.00565171 -0.01439755 -0.03639971]]
-(11, 3)
 the network was initialized with:
 The number of inputs to this net is: 3
-The number of hidden units to this net is: 10
-The number of outputs to this net is: 10
+The number of hidden units to this net is: 3
+The number of outputs to this net is: 2
+and a learning rate of  0.1  and a momentum of  0.9
+the initial weights are:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03597717  0.03652285 -0.02789236]
+ [-0.03364217  0.03418166  0.01210273]
+ [ 0.04965915  0.03356504  0.0268448 ]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.02605941  0.00544263 -0.01671196 -0.01449602]
+ [-0.04036844 -0.04874324  0.0111732  -0.00685763]]
+The size of the hidden weight matrix is:  (2, 4)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+starting epoch  1
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.49208518 0.49737503 0.51995541]
+output predictions:
+ [0.49019361 0.48441439]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.39019361  0.41558561]
+with a shape of:  (2,)
+1-K:
+[0.50980639 0.51558561]
+the result of the first element-wise multiplication is:
+[-0.1989232   0.21426996]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09751088  0.10379545]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.00164898 -0.00559004  0.00278933  0.00070173]
+with a shape of:  (4,)
+1-J:
+[0.         0.50791482 0.50262497 0.48004459]
+the result of the first element-wise multiplication is:
+[-0.         -0.00283927  0.00140198  0.00033686]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00139716  0.00069731  0.00017515]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+scaling the k error vector by the learning rate
+[-0.00975109  0.01037955]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00975109 -0.00479837 -0.00484995 -0.00507013]
+ [ 0.01037955  0.00510762  0.00516253  0.0053969 ]]
+the final delta matrix for the output weights:
+[[-0.00975109 -0.00479837 -0.00484995 -0.00507013]
+ [ 0.01037955  0.00510762  0.00516253  0.0053969 ]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00 -1.39716044e-04  6.97312169e-05  1.75152917e-05]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-1.39716044e-04 -6.98580220e-05 -6.98580220e-05]
+ [ 6.97312169e-05  3.48656085e-05  3.48656085e-05]
+ [ 1.75152917e-05  8.75764585e-06  8.75764585e-06]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.39716044e-04 -6.98580220e-05 -6.98580220e-05]
+ [ 6.97312169e-05  3.48656085e-05  3.48656085e-05]
+ [ 1.75152917e-05  8.75764585e-06  8.75764585e-06]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03611689  0.03645299 -0.02796222]
+ [-0.03357244  0.03421653  0.01213759]
+ [ 0.04967667  0.0335738   0.02685355]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.0358105   0.00064427 -0.02156191 -0.01956615]
+ [-0.0299889  -0.04363562  0.01633573 -0.00146073]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.48747812 0.49312452 0.51577063]
+output predictions:
+ [0.4859485  0.48901223]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.3859485   0.41098777]
+with a shape of:  (2,)
+1-K:
+[0.5140515  0.51098777]
+the result of the first element-wise multiplication is:
+[-0.19839741  0.21000972]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09641092  0.10269732]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00037274 -0.00454338  0.00375644  0.00173638]
+with a shape of:  (4,)
+1-J:
+[0.         0.51252188 0.50687548 0.48422937]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00232858  0.00190405  0.00084081]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00113513  0.00093893  0.00043366]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.00975109 -0.00479837 -0.00484995 -0.00507013]
+ [ 0.01037955  0.00510762  0.00516253  0.0053969 ]]
+after scaling by the momentum
+[[-0.00877598 -0.00431853 -0.00436495 -0.00456312]
+ [ 0.00934159  0.00459686  0.00464627  0.00485721]]
+scaling the k error vector by the learning rate
+[-0.00964109  0.01026973]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00964109 -0.00469982 -0.00475426 -0.00497259]
+ [ 0.01026973  0.00500627  0.00506426  0.00529683]]
+the final delta matrix for the output weights:
+[[-0.01841707 -0.00901835 -0.00911921 -0.00953571]
+ [ 0.01961132  0.00960313  0.00971053  0.01015404]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.39716044e-04 -6.98580220e-05 -6.98580220e-05]
+ [ 6.97312169e-05  3.48656085e-05  3.48656085e-05]
+ [ 1.75152917e-05  8.75764585e-06  8.75764585e-06]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.25744440e-04 -6.28722198e-05 -6.28722198e-05]
+ [ 6.27580952e-05  3.13790476e-05  3.13790476e-05]
+ [ 1.57637625e-05  7.88188127e-06  7.88188127e-06]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -1.13513152e-04  9.38932196e-05  4.33662702e-05]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.13513152e-04 -0.00000000e+00 -5.67565758e-05]
+ [ 9.38932196e-05  0.00000000e+00  4.69466098e-05]
+ [ 4.33662702e-05  0.00000000e+00  2.16831351e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.39257591e-04 -6.28722198e-05 -1.19628796e-04]
+ [ 1.56651315e-04  3.13790476e-05  7.83256574e-05]
+ [ 5.91300328e-05  7.88188127e-06  2.95650164e-05]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03635614  0.03639012 -0.02808185]
+ [-0.03341579  0.03424791  0.01221592]
+ [ 0.0497358   0.03358168  0.02688312]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.05422757 -0.00837408 -0.03068112 -0.02910186]
+ [-0.01037758 -0.03403249  0.02604626  0.00869331]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.49091197 0.49164683 0.51243139]
+output predictions:
+ [0.47793048 0.49754396]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.42206952 -0.39754396]
+with a shape of:  (2,)
+1-K:
+[0.52206952 0.50245604]
+the result of the first element-wise multiplication is:
+[ 0.22034964 -0.19974836]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.10531181 -0.09938359]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.00467944  0.00250038 -0.00581966 -0.00392874]
+with a shape of:  (4,)
+1-J:
+[0.         0.50908803 0.50835317 0.48756861]
+the result of the first element-wise multiplication is:
+[-0.          0.00127291 -0.00295844 -0.00191553]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[-0.          0.00062489 -0.00145451 -0.00098158]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01841707 -0.00901835 -0.00911921 -0.00953571]
+ [ 0.01961132  0.00960313  0.00971053  0.01015404]]
+after scaling by the momentum
+[[-0.01657536 -0.00811652 -0.00820729 -0.00858214]
+ [ 0.01765019  0.00864282  0.00873948  0.00913863]]
+scaling the k error vector by the learning rate
+[ 0.01053118 -0.00993836]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.01053118  0.00516988  0.00517762  0.00539651]
+ [-0.00993836 -0.00487886 -0.00488616 -0.00509273]]
+the final delta matrix for the output weights:
+[[-0.00604418 -0.00294663 -0.00302967 -0.00318563]
+ [ 0.00771183  0.00376396  0.00385332  0.00404591]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.39257591e-04 -6.28722198e-05 -1.19628796e-04]
+ [ 1.56651315e-04  3.13790476e-05  7.83256574e-05]
+ [ 5.91300328e-05  7.88188127e-06  2.95650164e-05]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.15331832e-04 -5.65849978e-05 -1.07665916e-04]
+ [ 1.40986183e-04  2.82411429e-05  7.04930917e-05]
+ [ 5.32170295e-05  7.09369314e-06  2.66085148e-05]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00  6.24888794e-05 -1.45450768e-04 -9.81578425e-05]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [ 6.24888794e-05  0.00000000e+00  0.00000000e+00]
+ [-1.45450768e-04 -0.00000000e+00 -0.00000000e+00]
+ [-9.81578425e-05 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.52842953e-04 -5.65849978e-05 -1.07665916e-04]
+ [-4.46458489e-06  2.82411429e-05  7.04930917e-05]
+ [-4.49408130e-05  7.09369314e-06  2.66085148e-05]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03650899  0.03633354 -0.02818951]
+ [-0.03342025  0.03427615  0.01228641]
+ [ 0.04969085  0.03358877  0.02690973]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.06027176 -0.01132072 -0.03371079 -0.0322875 ]
+ [-0.00266574 -0.03026853  0.02989958  0.01273922]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.49995614 0.50021397 0.52080788]]
+output predictions:
+ [[0.47511812 0.50094805]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5009480455159204 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.49189147 0.49746528 0.51997439]
+ [1.         0.48735176 0.49318116 0.51578119]
+ [1.         0.49087377 0.49164572 0.51242016]]
+output predictions:
+ [[0.4751707  0.50098587]
+ [0.4752533  0.50097485]
+ [0.47528333 0.50092601]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5009858710995051 at index  1
+incrementing target: 1  and predicted: 0.5009748458312684 at index  1
+incrementing target: 0  and predicted: 0.5009260130144271 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
+starting epoch  2
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.49189147 0.49746528 0.51997439]
+output predictions:
+ [0.4751707  0.50098587]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.3751707   0.39901413]
+with a shape of:  (2,)
+1-K:
+[0.5248293  0.49901413]
+the result of the first element-wise multiplication is:
+[-0.19690058  0.19911369]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09356139  0.09975314]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00537319 -0.0019602   0.0061366   0.00429164]
+with a shape of:  (4,)
+1-J:
+[0.         0.50810853 0.50253472 0.48002561]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00099599  0.00308386  0.0020601 ]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00048992  0.00153411  0.0010712 ]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.00604418 -0.00294663 -0.00302967 -0.00318563]
+ [ 0.00771183  0.00376396  0.00385332  0.00404591]]
+after scaling by the momentum
+[[-0.00543977 -0.00265197 -0.0027267  -0.00286707]
+ [ 0.00694065  0.00338756  0.00346798  0.00364132]]
+scaling the k error vector by the learning rate
+[-0.00935614  0.00997531]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00935614 -0.0046022  -0.00465435 -0.00486495]
+ [ 0.00997531  0.00490677  0.00496237  0.00518691]]
+the final delta matrix for the output weights:
+[[-0.0147959  -0.00725417 -0.00738106 -0.00773202]
+ [ 0.01691596  0.00829433  0.00843036  0.00882822]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.52842953e-04 -5.65849978e-05 -1.07665916e-04]
+ [-4.46458489e-06  2.82411429e-05  7.04930917e-05]
+ [-4.49408130e-05  7.09369314e-06  2.66085148e-05]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.37558657e-04 -5.09264980e-05 -9.68993244e-05]
+ [-4.01812640e-06  2.54170286e-05  6.34437825e-05]
+ [-4.04467317e-05  6.38432383e-06  2.39476633e-05]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -4.89920999e-05  1.53411176e-04  1.07119767e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-4.89920999e-05 -2.44960500e-05 -2.44960500e-05]
+ [ 1.53411176e-04  7.67055881e-05  7.67055881e-05]
+ [ 1.07119767e-04  5.35598837e-05  5.35598837e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.86550757e-04 -7.54225480e-05 -1.21395374e-04]
+ [ 1.49393050e-04  1.02122617e-04  1.40149371e-04]
+ [ 6.66730357e-05  5.99442075e-05  7.75075470e-05]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03669554  0.03625811 -0.02831091]
+ [-0.03327086  0.03437827  0.01242656]
+ [ 0.04975753  0.03364872  0.02698723]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.07506766 -0.01857489 -0.04109184 -0.04001952]
+ [ 0.01425022 -0.0219742   0.03832993  0.02156744]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.48728999 0.49323602 0.51580752]
+output predictions:
+ [0.46878331 0.5083924 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.36878331  0.3916076 ]
+with a shape of:  (2,)
+1-K:
+[0.53121669 0.4916076 ]
+the result of the first element-wise multiplication is:
+[-0.19590385  0.19251727]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09183646  0.09787432]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00828868 -0.00044486  0.00752525  0.00578615]
+with a shape of:  (4,)
+1-J:
+[0.         0.51271001 0.50676398 0.48419248]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00022808  0.00381352  0.00280161]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00011114  0.00188097  0.00144509]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.0147959  -0.00725417 -0.00738106 -0.00773202]
+ [ 0.01691596  0.00829433  0.00843036  0.00882822]]
+after scaling by the momentum
+[[-0.01331631 -0.00652876 -0.00664295 -0.00695882]
+ [ 0.01522437  0.0074649   0.00758732  0.0079454 ]]
+scaling the k error vector by the learning rate
+[-0.00918365  0.00978743]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00918365 -0.0044751  -0.0045297  -0.00473699]
+ [ 0.00978743  0.00476932  0.00482751  0.00504843]]
+the final delta matrix for the output weights:
+[[-0.02249996 -0.01100386 -0.01117266 -0.01169581]
+ [ 0.0250118   0.01223422  0.01241483  0.01299383]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.86550757e-04 -7.54225480e-05 -1.21395374e-04]
+ [ 1.49393050e-04  1.02122617e-04  1.40149371e-04]
+ [ 6.66730357e-05  5.99442075e-05  7.75075470e-05]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.67895682e-04 -6.78802932e-05 -1.09255837e-04]
+ [ 1.34453745e-04  9.19103550e-05  1.26134434e-04]
+ [ 6.00057321e-05  5.39497868e-05  6.97567923e-05]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -1.11142589e-05  1.88096703e-04  1.44509143e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.11142589e-05 -0.00000000e+00 -5.55712946e-06]
+ [ 1.88096703e-04  0.00000000e+00  9.40483517e-05]
+ [ 1.44509143e-04  0.00000000e+00  7.22545717e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.79009940e-04 -6.78802932e-05 -1.14812966e-04]
+ [ 3.22550448e-04  9.19103550e-05  2.20182785e-04]
+ [ 2.04514875e-04  5.39497868e-05  1.42011364e-04]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03687455  0.03619023 -0.02842572]
+ [-0.03294831  0.03447018  0.01264675]
+ [ 0.04996204  0.03370267  0.02712925]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.09756762 -0.02957875 -0.0522645  -0.05171533]
+ [ 0.03926202 -0.00973999  0.05074477  0.03456127]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.49078241 0.49176367 0.51248791]
+output predictions:
+ [0.45901973 0.51927756]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.44098027 -0.41927756]
+with a shape of:  (2,)
+1-K:
+[0.54098027 0.48072244]
+the result of the first element-wise multiplication is:
+[ 0.23856163 -0.20155613]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.10950449 -0.10466358]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.0147934  -0.00221958 -0.01103433 -0.00928037]
+with a shape of:  (4,)
+1-J:
+[0.         0.50921759 0.50823633 0.48751209]
+the result of the first element-wise multiplication is:
+[-0.         -0.00113025 -0.00560805 -0.00452429]
+with a shape of:  (4,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00055471 -0.00275783 -0.00231864]
+with a shape of:  (4,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.02249996 -0.01100386 -0.01117266 -0.01169581]
+ [ 0.0250118   0.01223422  0.01241483  0.01299383]]
+after scaling by the momentum
+[[-0.02024996 -0.00990347 -0.01005539 -0.01052623]
+ [ 0.02251062  0.0110108   0.01117335  0.01169445]]
+scaling the k error vector by the learning rate
+[ 0.01095045 -0.01046636]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.01095045  0.00537429  0.00538503  0.00561197]
+ [-0.01046636 -0.0051367  -0.00514697 -0.00536388]]
+the final delta matrix for the output weights:
+[[-0.00929951 -0.00452918 -0.00467036 -0.00491426]
+ [ 0.01204426  0.00587409  0.00602638  0.00633057]]
+with a shape of:  (2, 4)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.79009940e-04 -6.78802932e-05 -1.14812966e-04]
+ [ 3.22550448e-04  9.19103550e-05  2.20182785e-04]
+ [ 2.04514875e-04  5.39497868e-05  1.42011364e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.61108946e-04 -6.10922639e-05 -1.03331670e-04]
+ [ 2.90295403e-04  8.27193195e-05  1.98164507e-04]
+ [ 1.84063388e-04  4.85548081e-05  1.27810228e-04]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00 -5.54707425e-05 -2.75783303e-04 -2.31864454e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-5.54707425e-05 -0.00000000e+00 -0.00000000e+00]
+ [-2.75783303e-04 -0.00000000e+00 -0.00000000e+00]
+ [-2.31864454e-04 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.16579689e-04 -6.10922639e-05 -1.03331670e-04]
+ [ 1.45121008e-05  8.27193195e-05  1.98164507e-04]
+ [-4.78010658e-05  4.85548081e-05  1.27810228e-04]]
+with a shape of:  (4, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [-0.03709113  0.03612914 -0.02852905]
+ [-0.03293379  0.0345529   0.01284491]
+ [ 0.04991424  0.03375122  0.02725706]]
+The size of the hidden weight matrix is:  (4, 3)
+Output Weight Matrix
+[[-0.10686714 -0.03410793 -0.05693486 -0.05662959]
+ [ 0.05130628 -0.00386589  0.05677114  0.04089184]]
+The size of the hidden weight matrix is:  (2, 4)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.4997595  0.50040478 0.52090417]]
+output predictions:
+ [[0.45464949 0.52475064]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5247506395253964 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.491678   0.49769129 0.52009377]
+ [1.         0.48716391 0.49337255 0.51588035]
+ [1.         0.49072828 0.4917673  0.51247597]]
+output predictions:
+ [[0.45476752 0.52471175]
+ [0.45492583 0.52461199]
+ [0.45496615 0.5245511 ]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5247117488480663 at index  1
+incrementing target: 1  and predicted: 0.5246119863321256 at index  1
+incrementing target: 0  and predicted: 0.524551103058221 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
+Starting Experiment 1 with  4  hidden units
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+now initializing the network
+the network was initialized with:
+The number of inputs to this net is: 3
+The number of hidden units to this net is: 4
+The number of outputs to this net is: 2
+and a learning rate of  0.1  and a momentum of  0.9
+the initial weights are:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03759043  0.03513554 -0.01583758]
+ [-0.01681425  0.01356267  0.01921063]
+ [ 0.01390823  0.03068287  0.03211221]
+ [ 0.01057531  0.03153174 -0.04110372]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-6.25599560e-03  4.28966077e-03 -4.42821730e-02 -5.40338581e-03
+  -3.78219338e-02]
+ [ 4.91503083e-02 -3.97798166e-02  1.55354421e-03 -8.78602397e-05
+   2.22365050e-02]]
+The size of the hidden weight matrix is:  (2, 5)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+starting epoch  1
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.51180766 0.4998931  0.51132451 0.50144733]
+output predictions:
+ [0.48802093 0.5101668 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.38802093  0.3898332 ]
+with a shape of:  (2,)
+1-K:
+[0.51197907 0.4898332 ]
+the result of the first element-wise multiplication is:
+[-0.19865859  0.19095324]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09694955  0.09741801]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00539464 -0.00429115  0.00444448  0.0005153   0.00583306]
+with a shape of:  (5,)
+1-J:
+[0.         0.48819234 0.5001069  0.48867549 0.49855267]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00209491  0.00222272  0.00025181  0.00290809]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00107219  0.00111112  0.00012876  0.00145825]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0.]]
+scaling the k error vector by the learning rate
+[-0.00969496  0.0097418 ]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00969496 -0.00496195 -0.00484644 -0.00495727 -0.00486151]
+ [ 0.0097418   0.00498593  0.00486986  0.00498122  0.004885  ]]
+the final delta matrix for the output weights:
+[[-0.00969496 -0.00496195 -0.00484644 -0.00495727 -0.00486151]
+ [ 0.0097418   0.00498593  0.00486986  0.00498122  0.004885  ]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -1.07218949e-04  1.11111995e-04  1.28758082e-05
+  1.45825165e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.07218949e-04 -5.36094745e-05 -5.36094745e-05]
+ [ 1.11111995e-04  5.55559975e-05  5.55559975e-05]
+ [ 1.28758082e-05  6.43790409e-06  6.43790409e-06]
+ [ 1.45825165e-04  7.29125826e-05  7.29125826e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.07218949e-04 -5.36094745e-05 -5.36094745e-05]
+ [ 1.11111995e-04  5.55559975e-05  5.55559975e-05]
+ [ 1.28758082e-05  6.43790409e-06  6.43790409e-06]
+ [ 1.45825165e-04  7.29125826e-05  7.29125826e-05]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03748321  0.03508193 -0.01589119]
+ [-0.01670314  0.01361823  0.01926619]
+ [ 0.01392111  0.0306893   0.03211865]
+ [ 0.01072114  0.03160465 -0.0410308 ]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.01595095 -0.00067229 -0.04912861 -0.01036065 -0.04268344]
+ [ 0.05889211 -0.03479389  0.0064234   0.00489336  0.0271215 ]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.50738387 0.4982325  0.50749455 0.49755145]
+output predictions:
+ [0.48319016 0.51509948]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.38319016  0.38490052]
+with a shape of:  (2,)
+1-K:
+[0.51680984 0.48490052]
+the result of the first element-wise multiplication is:
+[-0.19803645  0.18663846]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09568926  0.09613737]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00718807 -0.00328066  0.00531861  0.00146184  0.00669174]
+with a shape of:  (5,)
+1-J:
+[0.         0.49261613 0.5017675  0.49250545 0.50244855]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00161611  0.00266871  0.00071996  0.00336225]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00081999  0.00132964  0.00036538  0.00167289]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.00969496 -0.00496195 -0.00484644 -0.00495727 -0.00486151]
+ [ 0.0097418   0.00498593  0.00486986  0.00498122  0.004885  ]]
+after scaling by the momentum
+[[-0.00872546 -0.00446576 -0.0043618  -0.00446154 -0.00437536]
+ [ 0.00876762  0.00448734  0.00438287  0.0044831   0.0043965 ]]
+scaling the k error vector by the learning rate
+[-0.00956893  0.00961374]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00956893 -0.00485512 -0.00476755 -0.00485618 -0.00476103]
+ [ 0.00961374  0.00487786  0.00478988  0.00487892  0.00478333]]
+the final delta matrix for the output weights:
+[[-0.01829439 -0.00932088 -0.00912935 -0.00931772 -0.00913639]
+ [ 0.01838136  0.00936519  0.00917275  0.00936202  0.00917983]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.07218949e-04 -5.36094745e-05 -5.36094745e-05]
+ [ 1.11111995e-04  5.55559975e-05  5.55559975e-05]
+ [ 1.28758082e-05  6.43790409e-06  6.43790409e-06]
+ [ 1.45825165e-04  7.29125826e-05  7.29125826e-05]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-9.64970542e-05 -4.82485271e-05 -4.82485271e-05]
+ [ 1.00000795e-04  5.00003977e-05  5.00003977e-05]
+ [ 1.15882274e-05  5.79411368e-06  5.79411368e-06]
+ [ 1.31242649e-04  6.56213244e-05  6.56213244e-05]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -8.19986636e-05  1.32963586e-04  3.65377444e-05
+  1.67289423e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-8.19986636e-05 -0.00000000e+00 -4.09993318e-05]
+ [ 1.32963586e-04  0.00000000e+00  6.64817930e-05]
+ [ 3.65377444e-05  0.00000000e+00  1.82688722e-05]
+ [ 1.67289423e-04  0.00000000e+00  8.36447116e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.78495718e-04 -4.82485271e-05 -8.92478589e-05]
+ [ 2.32964381e-04  5.00003977e-05  1.16482191e-04]
+ [ 4.81259717e-05  5.79411368e-06  2.40629859e-05]
+ [ 2.98532072e-04  6.56213244e-05  1.49266036e-04]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03730472  0.03503368 -0.01598044]
+ [-0.01647018  0.01366823  0.01938267]
+ [ 0.01396923  0.0306951   0.03214271]
+ [ 0.01101967  0.03167027 -0.04088154]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.03424534 -0.00999317 -0.05825796 -0.01967837 -0.05181983]
+ [ 0.07727347 -0.0254287   0.01559615  0.01425538  0.03630133]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.5093251  0.49588255 0.50349225 0.50275489]
+output predictions:
+ [0.47397733 0.52435172]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.42602267 -0.42435172]
+with a shape of:  (2,)
+1-K:
+[0.52602267 0.47564828]
+the result of the first element-wise multiplication is:
+[ 0.22409758 -0.20184217]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.10621717 -0.10583629]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.01181578  0.00162983 -0.00783863 -0.00359892 -0.00934615]
+with a shape of:  (5,)
+1-J:
+[0.         0.4906749  0.50411745 0.49650775 0.49724511]
+the result of the first element-wise multiplication is:
+[-0.          0.00079972 -0.00395159 -0.00178689 -0.00464733]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[-0.          0.00040732 -0.00195953 -0.00089969 -0.00233647]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01829439 -0.00932088 -0.00912935 -0.00931772 -0.00913639]
+ [ 0.01838136  0.00936519  0.00917275  0.00936202  0.00917983]]
+after scaling by the momentum
+[[-0.01646495 -0.00838879 -0.00821641 -0.00838595 -0.00822275]
+ [ 0.01654322  0.00842867  0.00825547  0.00842582  0.00826185]]
+scaling the k error vector by the learning rate
+[ 0.01062172 -0.01058363]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.01062172  0.00540991  0.00526712  0.00534795  0.00534012]
+ [-0.01058363 -0.00539051 -0.00524824 -0.00532878 -0.00532097]]
+the final delta matrix for the output weights:
+[[-0.00584323 -0.00297888 -0.00294929 -0.00303799 -0.00288263]
+ [ 0.00595959  0.00303816  0.00300724  0.00309704  0.00294087]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.78495718e-04 -4.82485271e-05 -8.92478589e-05]
+ [ 2.32964381e-04  5.00003977e-05  1.16482191e-04]
+ [ 4.81259717e-05  5.79411368e-06  2.40629859e-05]
+ [ 2.98532072e-04  6.56213244e-05  1.49266036e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.60646146e-04 -4.34236744e-05 -8.03230730e-05]
+ [ 2.09667943e-04  4.50003579e-05  1.04833972e-04]
+ [ 4.33133746e-05  5.21470231e-06  2.16566873e-05]
+ [ 2.68678865e-04  5.90591919e-05  1.34339432e-04]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00  4.07316518e-05 -1.95952580e-04 -8.99685507e-05
+ -2.33646774e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [ 4.07316518e-05  0.00000000e+00  0.00000000e+00]
+ [-1.95952580e-04 -0.00000000e+00 -0.00000000e+00]
+ [-8.99685507e-05 -0.00000000e+00 -0.00000000e+00]
+ [-2.33646774e-04 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.19914494e-04 -4.34236744e-05 -8.03230730e-05]
+ [ 1.37153631e-05  4.50003579e-05  1.04833972e-04]
+ [-4.66551761e-05  5.21470231e-06  2.16566873e-05]
+ [ 3.50320911e-05  5.90591919e-05  1.34339432e-04]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.0371848   0.03499025 -0.01606076]
+ [-0.01645646  0.01371323  0.0194875 ]
+ [ 0.01392258  0.03070031  0.03216437]
+ [ 0.0110547   0.03172933 -0.0407472 ]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.04008857 -0.01297205 -0.06120725 -0.02271637 -0.05470247]
+ [ 0.08323306 -0.02239053  0.01860339  0.01735242  0.03924221]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.51803594 0.49931419 0.51115387 0.51069438]]
+output predictions:
+ [[0.47080375 0.52743079]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5274307869263556 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.51166027 0.50003598 0.51133679 0.50163644]
+ [1.         0.50728809 0.49832183 0.50750063 0.49767029]
+ [1.         0.50929513 0.49588598 0.50348059 0.50276365]]
+output predictions:
+ [[0.47093577 0.52738191]
+ [0.47105181 0.52734298]
+ [0.4710358  0.52735291]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5273819098456496 at index  1
+incrementing target: 1  and predicted: 0.5273429767161251 at index  1
+incrementing target: 0  and predicted: 0.5273529127211951 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
+starting epoch  2
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.51166027 0.50003598 0.51133679 0.50163644]
+output predictions:
+ [0.47093577 0.52738191]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.37093577  0.37261809]
+with a shape of:  (2,)
+1-K:
+[0.52906423 0.47261809]
+the result of the first element-wise multiplication is:
+[-0.19624885  0.17610605]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.0924206   0.09287515]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.01143529 -0.00088064  0.0073846   0.00371107  0.00870026]
+with a shape of:  (5,)
+1-J:
+[0.         0.48833973 0.49996402 0.48866321 0.49836356]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00043005  0.00369204  0.00181346  0.00433589]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00022004  0.00184615  0.00092729  0.00217504]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.00584323 -0.00297888 -0.00294929 -0.00303799 -0.00288263]
+ [ 0.00595959  0.00303816  0.00300724  0.00309704  0.00294087]]
+after scaling by the momentum
+[[-0.00525891 -0.00268099 -0.00265436 -0.0027342  -0.00259437]
+ [ 0.00536363  0.00273435  0.00270651  0.00278734  0.00264679]]
+scaling the k error vector by the learning rate
+[-0.00924206  0.00928751]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00924206 -0.0047288  -0.00462136 -0.00472581 -0.00463615]
+ [ 0.00928751  0.00475205  0.00464409  0.00474905  0.00465896]]
+the final delta matrix for the output weights:
+[[-0.01450097 -0.00740979 -0.00727572 -0.00746    -0.00723052]
+ [ 0.01465115  0.0074864   0.00735061  0.00753639  0.00730574]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.19914494e-04 -4.34236744e-05 -8.03230730e-05]
+ [ 1.37153631e-05  4.50003579e-05  1.04833972e-04]
+ [-4.66551761e-05  5.21470231e-06  2.16566873e-05]
+ [ 3.50320911e-05  5.90591919e-05  1.34339432e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.07923045e-04 -3.90813069e-05 -7.22907657e-05]
+ [ 1.23438268e-05  4.05003222e-05  9.43505745e-05]
+ [-4.19896585e-05  4.69323208e-06  1.94910186e-05]
+ [ 3.15288820e-05  5.31532727e-05  1.20905489e-04]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -2.20040166e-05  1.84615082e-04  9.27290302e-05
+  2.17504187e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.20040166e-05 -1.10020083e-05 -1.10020083e-05]
+ [ 1.84615082e-04  9.23075412e-05  9.23075412e-05]
+ [ 9.27290302e-05  4.63645151e-05  4.63645151e-05]
+ [ 2.17504187e-04  1.08752094e-04  1.08752094e-04]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.29927061e-04 -5.00833152e-05 -8.32927740e-05]
+ [ 1.96958909e-04  1.32807863e-04  1.86658116e-04]
+ [ 5.07393717e-05  5.10577472e-05  6.58555337e-05]
+ [ 2.49033069e-04  1.61905366e-04  2.29657583e-04]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03705488  0.03494017 -0.01614405]
+ [-0.0162595   0.01384603  0.01967416]
+ [ 0.01397332  0.03075137  0.03223022]
+ [ 0.01130374  0.03189124 -0.04051754]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.05458953 -0.02038184 -0.06848297 -0.03017637 -0.06193299]
+ [ 0.09788421 -0.01490413  0.025954    0.02488881  0.04654795]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.5072452  0.4983944  0.50752154 0.49776126]
+output predictions:
+ [0.46376298 0.5347093 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.36376298  0.3652907 ]
+with a shape of:  (2,)
+1-K:
+[0.53623702 0.4652907 ]
+the result of the first element-wise multiplication is:
+[-0.19506318  0.16996637]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09046308  0.0908826 ]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[0.01383431 0.00048928 0.00855395 0.00499181 0.00983305]
+with a shape of:  (5,)
+1-J:
+[0.         0.4927548  0.5016056  0.49247846 0.50223874]
+the result of the first element-wise multiplication is:
+[0.         0.00024109 0.00429071 0.00245836 0.00493854]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[0.         0.00012229 0.00213846 0.00124767 0.00245821]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01450097 -0.00740979 -0.00727572 -0.00746    -0.00723052]
+ [ 0.01465115  0.0074864   0.00735061  0.00753639  0.00730574]]
+after scaling by the momentum
+[[-0.01305087 -0.00666881 -0.00654815 -0.006714   -0.00650747]
+ [ 0.01318603  0.00673776  0.00661554  0.00678275  0.00657517]]
+scaling the k error vector by the learning rate
+[-0.00904631  0.00908826]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00904631 -0.0045887  -0.00450863 -0.0045912  -0.0045029 ]
+ [ 0.00908826  0.00460998  0.00452954  0.00461249  0.00452378]]
+the final delta matrix for the output weights:
+[[-0.02209718 -0.01125751 -0.01105678 -0.0113052  -0.01101037]
+ [ 0.02227429  0.01134774  0.01114508  0.01139523  0.01109895]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.29927061e-04 -5.00833152e-05 -8.32927740e-05]
+ [ 1.96958909e-04  1.32807863e-04  1.86658116e-04]
+ [ 5.07393717e-05  5.10577472e-05  6.58555337e-05]
+ [ 2.49033069e-04  1.61905366e-04  2.29657583e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.16934355e-04 -4.50749837e-05 -7.49634966e-05]
+ [ 1.77263018e-04  1.19527077e-04  1.67992304e-04]
+ [ 4.56654345e-05  4.59519725e-05  5.92699803e-05]
+ [ 2.24129762e-04  1.45714830e-04  2.06691825e-04]]
+scaling the j error vector by the learning rate
+[0.00000000e+00 1.22293631e-05 2.13846471e-04 1.24766926e-04
+ 2.45821266e-04]
+the outer multiply of j error vector and the inputs is:
+[[0.00000000e+00 0.00000000e+00 0.00000000e+00]
+ [1.22293631e-05 0.00000000e+00 6.11468153e-06]
+ [2.13846471e-04 0.00000000e+00 1.06923235e-04]
+ [1.24766926e-04 0.00000000e+00 6.23834630e-05]
+ [2.45821266e-04 0.00000000e+00 1.22910633e-04]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.04704992e-04 -4.50749837e-05 -6.88488150e-05]
+ [ 3.91109489e-04  1.19527077e-04  2.74915539e-04]
+ [ 1.70432361e-04  4.59519725e-05  1.21653443e-04]
+ [ 4.69951029e-04  1.45714830e-04  3.29602458e-04]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03695017  0.0348951  -0.0162129 ]
+ [-0.01586839  0.01396556  0.01994908]
+ [ 0.01414375  0.03079732  0.03235188]
+ [ 0.01177369  0.03203695 -0.04018794]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.07668671 -0.03163934 -0.07953975 -0.04148157 -0.07294336]
+ [ 0.1201585  -0.0035564   0.03709908  0.03628404  0.0576469 ]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.50923649 0.49603299 0.50353588 0.50294339]
+output predictions:
+ [0.45268529 0.54587395]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.44731471 -0.44587395]
+with a shape of:  (2,)
+1-K:
+[0.54731471 0.45412605]
+the result of the first element-wise multiplication is:
+[ 0.24482192 -0.20248298]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.11082728 -0.11053018]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.02178012 -0.00311341 -0.01291574 -0.00860777 -0.01445584]
+with a shape of:  (5,)
+1-J:
+[0.         0.49076351 0.50396701 0.49646412 0.49705661]
+the result of the first element-wise multiplication is:
+[-0.         -0.00152795 -0.00650911 -0.00427345 -0.00718537]
+with a shape of:  (5,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00077809 -0.00322873 -0.00215184 -0.00361383]
+with a shape of:  (5,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.02209718 -0.01125751 -0.01105678 -0.0113052  -0.01101037]
+ [ 0.02227429  0.01134774  0.01114508  0.01139523  0.01109895]]
+after scaling by the momentum
+[[-0.01988746 -0.01013175 -0.0099511  -0.01017468 -0.00990934]
+ [ 0.02004686  0.01021296  0.01003057  0.01025571  0.00998906]]
+scaling the k error vector by the learning rate
+[ 0.01108273 -0.01105302]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.01108273  0.00564373  0.0054974   0.00558055  0.00557398]
+ [-0.01105302 -0.0056286  -0.00548266 -0.00556559 -0.00555904]]
+the final delta matrix for the output weights:
+[[-0.00880473 -0.00448803 -0.0044537  -0.00459413 -0.00433535]
+ [ 0.00899385  0.00458436  0.00454791  0.00469012  0.00443001]]
+with a shape of:  (2, 5)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.04704992e-04 -4.50749837e-05 -6.88488150e-05]
+ [ 3.91109489e-04  1.19527077e-04  2.74915539e-04]
+ [ 1.70432361e-04  4.59519725e-05  1.21653443e-04]
+ [ 4.69951029e-04  1.45714830e-04  3.29602458e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-9.42344929e-05 -4.05674853e-05 -6.19639335e-05]
+ [ 3.51998540e-04  1.07574369e-04  2.47423986e-04]
+ [ 1.53389124e-04  4.13567752e-05  1.09488099e-04]
+ [ 4.22955926e-04  1.31143347e-04  2.96642212e-04]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00 -7.78087599e-05 -3.22873225e-04 -2.15183507e-04
+ -3.61383407e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-7.78087599e-05 -0.00000000e+00 -0.00000000e+00]
+ [-3.22873225e-04 -0.00000000e+00 -0.00000000e+00]
+ [-2.15183507e-04 -0.00000000e+00 -0.00000000e+00]
+ [-3.61383407e-04 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.72043253e-04 -4.05674853e-05 -6.19639335e-05]
+ [ 2.91253150e-05  1.07574369e-04  2.47423986e-04]
+ [-6.17943823e-05  4.13567752e-05  1.09488099e-04]
+ [ 6.15725185e-05  1.31143347e-04  2.96642212e-04]]
+with a shape of:  (5, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.03677813  0.03485453 -0.01627487]
+ [-0.01583927  0.01407314  0.0201965 ]
+ [ 0.01408196  0.03083868  0.03246136]
+ [ 0.01183526  0.0321681  -0.0398913 ]]
+The size of the hidden weight matrix is:  (5, 3)
+Output Weight Matrix
+[[-0.08549144 -0.03612737 -0.08399345 -0.04607569 -0.07727871]
+ [ 0.12915235  0.00102796  0.04164699  0.04097416  0.06207692]]
+The size of the hidden weight matrix is:  (2, 5)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.51790051 0.49955847 0.51122827 0.51099906]]
+output predictions:
+ [[0.44788842 0.55061559]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5506155890628908 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.51151495 0.50032389 0.511431   0.5019934 ]
+ [1.         0.50715968 0.49856475 0.50757758 0.49797241]
+ [1.         0.5091935  0.49604027 0.50352043 0.50295878]]
+output predictions:
+ [[0.44809937 0.55048558]
+ [0.44829559 0.5503655 ]
+ [0.44828079 0.55037546]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5504855758271326 at index  1
+incrementing target: 1  and predicted: 0.5503654993351602 at index  1
+incrementing target: 0  and predicted: 0.5503754605894877 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
+Starting Experiment 1 with  5  hidden units
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+now initializing the network
+the network was initialized with:
+The number of inputs to this net is: 3
+The number of hidden units to this net is: 5
+The number of outputs to this net is: 2
+and a learning rate of  0.1  and a momentum of  0.9
+the initial weights are:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01510411 -0.01978806  0.01655039]
+ [-0.03815166 -0.02867143  0.04204775]
+ [-0.02687587  0.01079436  0.01623695]
+ [-0.02993836 -0.04720266  0.04253651]
+ [-0.04383342  0.04947286 -0.03990817]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[ 0.04420397  0.00474232  0.019586   -0.02056285  0.04045463 -0.02510302]
+ [-0.00834934 -0.0399812  -0.02542727  0.03783036 -0.045488    0.03346438]]
+The size of the hidden weight matrix is:  (2, 6)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+starting epoch  1
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.50337127 0.49213477 0.49666    0.49193284 0.49023847]
+output predictions:
+ [0.51339975 0.4929577 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.41339975  0.4070423 ]
+with a shape of:  (2,)
+1-K:
+[0.48660025 0.5070423 ]
+the result of the first element-wise multiplication is:
+[-0.20116042  0.20638766]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.10327571  0.10174039]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.00541466 -0.00455747 -0.00460974  0.00597252 -0.00880595  0.00599721]
+with a shape of:  (6,)
+1-J:
+[0.         0.49662873 0.50786523 0.50334    0.50806716 0.50976153]
+the result of the first element-wise multiplication is:
+[-0.         -0.00226337 -0.00234113  0.00300621 -0.00447401  0.00305715]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00113932 -0.00115215  0.00149306 -0.00220091  0.00149873]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0.]]
+scaling the k error vector by the learning rate
+[-0.01032757  0.01017404]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.01032757 -0.0051986  -0.00508256 -0.00512929 -0.00508047 -0.00506297]
+ [ 0.01017404  0.00512132  0.005007    0.00505304  0.00500494  0.00498771]]
+the final delta matrix for the output weights:
+[[-0.01032757 -0.0051986  -0.00508256 -0.00512929 -0.00508047 -0.00506297]
+ [ 0.01017404  0.00512132  0.005007    0.00505304  0.00500494  0.00498771]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+after scaling by the momentum
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+scaling the j error vector by the learning rate
+[-0.         -0.00011393 -0.00011521  0.00014931 -0.00022009  0.00014987]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-1.13931547e-04 -5.69657737e-05 -5.69657737e-05]
+ [-1.15214961e-04 -5.76074807e-05 -5.76074807e-05]
+ [ 1.49306294e-04  7.46531469e-05  7.46531469e-05]
+ [-2.20091368e-04 -1.10045684e-04 -1.10045684e-04]
+ [ 1.49873123e-04  7.49365613e-05  7.49365613e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.13931547e-04 -5.69657737e-05 -5.69657737e-05]
+ [-1.15214961e-04 -5.76074807e-05 -5.76074807e-05]
+ [ 1.49306294e-04  7.46531469e-05  7.46531469e-05]
+ [-2.20091368e-04 -1.10045684e-04 -1.10045684e-04]
+ [ 1.49873123e-04  7.49365613e-05  7.49365613e-05]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01499017 -0.01984503  0.01649343]
+ [-0.03826687 -0.02872904  0.04199014]
+ [-0.02672656  0.01086902  0.0163116 ]
+ [-0.03015846 -0.04731271  0.04242646]
+ [-0.04368355  0.0495478  -0.03983324]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[ 0.0338764  -0.00045628  0.01450345 -0.02569214  0.03537416 -0.03016599]
+ [ 0.00182469 -0.03485988 -0.02042028  0.0428834  -0.04048305  0.03845208]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.50580896 0.49568216 0.49535744 0.49776371 0.48410532]
+output predictions:
+ [0.50777747 0.4984442 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.40777747  0.4015558 ]
+with a shape of:  (2,)
+1-K:
+[0.49222253 0.5015558 ]
+the result of the first element-wise multiplication is:
+[-0.20071726  0.20140264]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.1019197   0.10038798]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.0032695  -0.00345301 -0.00352814  0.00692351 -0.00766934  0.00693464]
+with a shape of:  (6,)
+1-J:
+[0.         0.49419104 0.50431784 0.50464256 0.50223629 0.51589468]
+the result of the first element-wise multiplication is:
+[-0.         -0.00170645 -0.0017793   0.0034939  -0.00385182  0.00357754]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00086314 -0.00088197  0.00173073 -0.0019173   0.00173191]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01032757 -0.0051986  -0.00508256 -0.00512929 -0.00508047 -0.00506297]
+ [ 0.01017404  0.00512132  0.005007    0.00505304  0.00500494  0.00498771]]
+after scaling by the momentum
+[[-0.00929481 -0.00467874 -0.0045743  -0.00461636 -0.00457242 -0.00455668]
+ [ 0.00915663  0.00460919  0.0045063   0.00454773  0.00450445  0.00448893]]
+scaling the k error vector by the learning rate
+[-0.01019197  0.0100388 ]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.01019197 -0.00515519 -0.00505198 -0.00504867 -0.00507319 -0.00493399]
+ [ 0.0100388   0.00507771  0.00497605  0.00497279  0.00499695  0.00485984]]
+the final delta matrix for the output weights:
+[[-0.01948678 -0.00983393 -0.00962628 -0.00966503 -0.00964562 -0.00949066]
+ [ 0.01919543  0.0096869   0.00948235  0.00952053  0.0095014   0.00934877]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.13931547e-04 -5.69657737e-05 -5.69657737e-05]
+ [-1.15214961e-04 -5.76074807e-05 -5.76074807e-05]
+ [ 1.49306294e-04  7.46531469e-05  7.46531469e-05]
+ [-2.20091368e-04 -1.10045684e-04 -1.10045684e-04]
+ [ 1.49873123e-04  7.49365613e-05  7.49365613e-05]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.02538393e-04 -5.12691963e-05 -5.12691963e-05]
+ [-1.03693465e-04 -5.18467326e-05 -5.18467326e-05]
+ [ 1.34375664e-04  6.71878322e-05  6.71878322e-05]
+ [-1.98082231e-04 -9.90411155e-05 -9.90411155e-05]
+ [ 1.34885810e-04  6.74429051e-05  6.74429051e-05]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00 -8.63135648e-05 -8.81968508e-05  1.73072899e-04
+ -1.91729552e-04  1.73190692e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-8.63135648e-05 -0.00000000e+00 -4.31567824e-05]
+ [-8.81968508e-05 -0.00000000e+00 -4.40984254e-05]
+ [ 1.73072899e-04  0.00000000e+00  8.65364494e-05]
+ [-1.91729552e-04 -0.00000000e+00 -9.58647762e-05]
+ [ 1.73190692e-04  0.00000000e+00  8.65953462e-05]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.88851957e-04 -5.12691963e-05 -9.44259787e-05]
+ [-1.91890316e-04 -5.18467326e-05 -9.59451580e-05]
+ [ 3.07448563e-04  6.71878322e-05  1.53724282e-04]
+ [-3.89811783e-04 -9.90411155e-05 -1.94905892e-04]
+ [ 3.08076503e-04  6.74429051e-05  1.54038251e-04]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01480132 -0.01989629  0.016399  ]
+ [-0.03845876 -0.02878089  0.04189419]
+ [-0.02641911  0.0109362   0.01646533]
+ [-0.03054827 -0.04741175  0.04223156]
+ [-0.04337547  0.04961524 -0.0396792 ]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[ 0.01438962 -0.01029021  0.00487717 -0.03535717  0.02572854 -0.03965665]
+ [ 0.02102013 -0.02517298 -0.01093792  0.05240393 -0.03098165  0.04780085]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.50370026 0.49038649 0.49339561 0.49236353 0.48915783]
+output predictions:
+ [0.49685566 0.50923907]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.40314434 -0.40923907]
+with a shape of:  (2,)
+1-K:
+[0.50314434 0.49076093]
+the result of the first element-wise multiplication is:
+[ 0.20283979 -0.20083855]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.1007821  -0.10227483]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.00069961  0.00153749  0.00161021 -0.00892297  0.00576162 -0.0088855 ]
+with a shape of:  (6,)
+1-J:
+[0.         0.49629974 0.50961351 0.50660439 0.50763647 0.51084217]
+the result of the first element-wise multiplication is:
+[-0.          0.00076306  0.00082058 -0.00452042  0.00292481 -0.00453909]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[-0.          0.00038435  0.0004024  -0.00223035  0.00144007 -0.00222033]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01948678 -0.00983393 -0.00962628 -0.00966503 -0.00964562 -0.00949066]
+ [ 0.01919543  0.0096869   0.00948235  0.00952053  0.0095014   0.00934877]]
+after scaling by the momentum
+[[-0.01753811 -0.00885054 -0.00866365 -0.00869853 -0.00868106 -0.0085416 ]
+ [ 0.01727589  0.00871821  0.00853412  0.00856847  0.00855126  0.00841389]]
+scaling the k error vector by the learning rate
+[ 0.01007821 -0.01022748]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.01007821  0.0050764   0.00494222  0.00497254  0.00496214  0.00492984]
+ [-0.01022748 -0.00515159 -0.00501542 -0.0050462  -0.00503564 -0.00500285]]
+the final delta matrix for the output weights:
+[[-0.0074599  -0.00377414 -0.00372143 -0.00372598 -0.00371891 -0.00361176]
+ [ 0.00704841  0.00356662  0.0035187   0.00352228  0.00351562  0.00341104]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.88851957e-04 -5.12691963e-05 -9.44259787e-05]
+ [-1.91890316e-04 -5.18467326e-05 -9.59451580e-05]
+ [ 3.07448563e-04  6.71878322e-05  1.53724282e-04]
+ [-3.89811783e-04 -9.90411155e-05 -1.94905892e-04]
+ [ 3.08076503e-04  6.74429051e-05  1.54038251e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.69966762e-04 -4.61422767e-05 -8.49833808e-05]
+ [-1.72701284e-04 -4.66620594e-05 -8.63506422e-05]
+ [ 2.76703707e-04  6.04690490e-05  1.38351853e-04]
+ [-3.50830605e-04 -8.91370040e-05 -1.75415303e-04]
+ [ 2.77268852e-04  6.06986146e-05  1.38634426e-04]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00  3.84352146e-05  4.02402583e-05 -2.23035394e-04
+  1.44006899e-04 -2.22033172e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [ 3.84352146e-05  0.00000000e+00  0.00000000e+00]
+ [ 4.02402583e-05  0.00000000e+00  0.00000000e+00]
+ [-2.23035394e-04 -0.00000000e+00 -0.00000000e+00]
+ [ 1.44006899e-04  0.00000000e+00  0.00000000e+00]
+ [-2.22033172e-04 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.31531547e-04 -4.61422767e-05 -8.49833808e-05]
+ [-1.32461026e-04 -4.66620594e-05 -8.63506422e-05]
+ [ 5.36683126e-05  6.04690490e-05  1.38351853e-04]
+ [-2.06823706e-04 -8.91370040e-05 -1.75415303e-04]
+ [ 5.52356803e-05  6.06986146e-05  1.38634426e-04]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01466979 -0.01994244  0.01631402]
+ [-0.03859122 -0.02882755  0.04180784]
+ [-0.02636544  0.01099667  0.01660368]
+ [-0.03075509 -0.04750088  0.04205614]
+ [-0.04332024  0.04967594 -0.03954056]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[ 0.00692972 -0.01406436  0.00115574 -0.03908315  0.02200963 -0.04326841]
+ [ 0.02806853 -0.02160635 -0.00741923  0.05592621 -0.02746603  0.05121189]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.49868184 0.48315169 0.49615788 0.48044598 0.50158892]]
+output predictions:
+ [[0.4924892  0.51348394]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5134839361622902 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.50321385 0.49197542 0.49685872 0.49163142 0.49043803]
+ [1.         0.50570645 0.49557829 0.49548422 0.49756826 0.4842326 ]
+ [1.         0.50366738 0.49035339 0.49340902 0.49231183 0.48917163]]
+output predictions:
+ [[0.4926511  0.5132335 ]
+ [0.49275658 0.51307403]
+ [0.49270017 0.51316499]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5132334981190796 at index  1
+incrementing target: 1  and predicted: 0.513074030895077 at index  1
+incrementing target: 0  and predicted: 0.5131649867449232 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
+starting epoch  2
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.5 0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.5 0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.50321385 0.49197542 0.49685872 0.49163142 0.49043803]
+output predictions:
+ [0.4926511 0.5132335]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.3926511  0.3867665]
+with a shape of:  (2,)
+1-K:
+[0.5073489 0.4867665]
+the result of the first element-wise multiplication is:
+[-0.1992111   0.18826498]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09814157  0.09662389]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.002032   -0.00070739 -0.0008303   0.00923949 -0.00481393  0.00919472]
+with a shape of:  (6,)
+1-J:
+[0.         0.49678615 0.50802458 0.50314128 0.50836858 0.50956197]
+the result of the first element-wise multiplication is:
+[ 0.         -0.00035142 -0.00042181  0.00464877 -0.00244725  0.00468528]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[ 0.         -0.00017684 -0.00020752  0.00230978 -0.00120315  0.00229784]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.0074599  -0.00377414 -0.00372143 -0.00372598 -0.00371891 -0.00361176]
+ [ 0.00704841  0.00356662  0.0035187   0.00352228  0.00351562  0.00341104]]
+after scaling by the momentum
+[[-0.00671391 -0.00339673 -0.00334929 -0.00335338 -0.00334702 -0.00325058]
+ [ 0.00634357  0.00320996  0.00316683  0.00317005  0.00316406  0.00306994]]
+scaling the k error vector by the learning rate
+[-0.00981416  0.00966239]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00981416 -0.00493862 -0.00482832 -0.00487625 -0.00482495 -0.00481324]
+ [ 0.00966239  0.00486225  0.00475366  0.00480084  0.00475033  0.0047388 ]]
+the final delta matrix for the output weights:
+[[-0.01652806 -0.00833535 -0.00817761 -0.00822963 -0.00817197 -0.00806382]
+ [ 0.01600595  0.00807221  0.00792048  0.00797089  0.00791439  0.00780874]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.31531547e-04 -4.61422767e-05 -8.49833808e-05]
+ [-1.32461026e-04 -4.66620594e-05 -8.63506422e-05]
+ [ 5.36683126e-05  6.04690490e-05  1.38351853e-04]
+ [-2.06823706e-04 -8.91370040e-05 -1.75415303e-04]
+ [ 5.52356803e-05  6.06986146e-05  1.38634426e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.18378392e-04 -4.15280490e-05 -7.64850427e-05]
+ [-1.19214924e-04 -4.19958534e-05 -7.77155780e-05]
+ [ 4.83014813e-05  5.44221441e-05  1.24516668e-04]
+ [-1.86141335e-04 -8.02233036e-05 -1.57873772e-04]
+ [ 4.97121123e-05  5.46287532e-05  1.24770984e-04]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00 -1.76840695e-05 -2.07521607e-05  2.30978123e-04
+ -1.20314656e-04  2.29783991e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.76840695e-05 -8.84203477e-06 -8.84203477e-06]
+ [-2.07521607e-05 -1.03760803e-05 -1.03760803e-05]
+ [ 2.30978123e-04  1.15489062e-04  1.15489062e-04]
+ [-1.20314656e-04 -6.01573280e-05 -6.01573280e-05]
+ [ 2.29783991e-04  1.14891996e-04  1.14891996e-04]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.36062462e-04 -5.03700838e-05 -8.53270775e-05]
+ [-1.39967084e-04 -5.23719338e-05 -8.80916584e-05]
+ [ 2.79279605e-04  1.69911206e-04  2.40005730e-04]
+ [-3.06455992e-04 -1.40380632e-04 -2.18031100e-04]
+ [ 2.79496104e-04  1.69520749e-04  2.39662979e-04]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01453373 -0.01999281  0.01622869]
+ [-0.03873119 -0.02887992  0.04171975]
+ [-0.02608617  0.01116658  0.01684368]
+ [-0.03106155 -0.04764126  0.04183811]
+ [-0.04304074  0.04984546 -0.0393009 ]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[-0.00959834 -0.0223997  -0.00702188 -0.04731279  0.01383766 -0.05133223]
+ [ 0.04407449 -0.01353414  0.00050126  0.0638971  -0.01955164  0.05902063]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1.  0.  0.5]
+which has a shape of:  (3,)
+where the target is: 1
+this makes the target vector the following,
+[0.1 0.9]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1.  0.  0.5]
+the network predicted the following:
+hidden activations:
+ [1.         0.50566178 0.49553229 0.49558403 0.4974644  0.48433233]
+output predictions:
+ [0.4835484  0.52198704]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[-0.3835484   0.37801296]
+with a shape of:  (2,)
+1-K:
+[0.5164516  0.47801296]
+the result of the first element-wise multiplication is:
+[-0.19808418  0.18069509]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[-0.09578329  0.0943205 ]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[ 0.00507649  0.00086897  0.00071986  0.01055858 -0.00316954  0.01048363]
+with a shape of:  (6,)
+1-J:
+[0.         0.49433822 0.50446771 0.50441597 0.5025356  0.51566767]
+the result of the first element-wise multiplication is:
+[ 0.          0.00042957  0.00036314  0.00532592 -0.00159281  0.00540607]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[ 0.          0.00021721  0.00017995  0.00263944 -0.00079236  0.00261833]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.01652806 -0.00833535 -0.00817761 -0.00822963 -0.00817197 -0.00806382]
+ [ 0.01600595  0.00807221  0.00792048  0.00797089  0.00791439  0.00780874]]
+after scaling by the momentum
+[[-0.01487526 -0.00750181 -0.00735985 -0.00740667 -0.00735477 -0.00725744]
+ [ 0.01440536  0.00726499  0.00712844  0.0071738   0.00712295  0.00702786]]
+scaling the k error vector by the learning rate
+[-0.00957833  0.00943205]
+the outer multiply of k error vector and the hidden activiations is:
+[[-0.00957833 -0.00484339 -0.00474637 -0.00474687 -0.00476488 -0.00463909]
+ [ 0.00943205  0.00476943  0.00467389  0.00467437  0.00469211  0.00456825]]
+the final delta matrix for the output weights:
+[[-0.02445359 -0.01234521 -0.01210622 -0.01215354 -0.01211965 -0.01189653]
+ [ 0.02383741  0.01203442  0.01180232  0.01184818  0.01181506  0.01159611]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.36062462e-04 -5.03700838e-05 -8.53270775e-05]
+ [-1.39967084e-04 -5.23719338e-05 -8.80916584e-05]
+ [ 2.79279605e-04  1.69911206e-04  2.40005730e-04]
+ [-3.06455992e-04 -1.40380632e-04 -2.18031100e-04]
+ [ 2.79496104e-04  1.69520749e-04  2.39662979e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.22456216e-04 -4.53330754e-05 -7.67943698e-05]
+ [-1.25970376e-04 -4.71347404e-05 -7.92824925e-05]
+ [ 2.51351644e-04  1.52920085e-04  2.16005157e-04]
+ [-2.75810392e-04 -1.26342568e-04 -1.96227990e-04]
+ [ 2.51546493e-04  1.52568674e-04  2.15696681e-04]]
+scaling the j error vector by the learning rate
+[ 0.00000000e+00  2.17214695e-05  1.79950004e-05  2.63943925e-04
+ -7.92363973e-05  2.61833291e-04]
+the outer multiply of j error vector and the inputs is:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 2.17214695e-05  0.00000000e+00  1.08607348e-05]
+ [ 1.79950004e-05  0.00000000e+00  8.99750021e-06]
+ [ 2.63943925e-04  0.00000000e+00  1.31971963e-04]
+ [-7.92363973e-05 -0.00000000e+00 -3.96181986e-05]
+ [ 2.61833291e-04  0.00000000e+00  1.30916646e-04]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.00734746e-04 -4.53330754e-05 -6.59336350e-05]
+ [-1.07975375e-04 -4.71347404e-05 -7.02849923e-05]
+ [ 5.15295569e-04  1.52920085e-04  3.47977119e-04]
+ [-3.55046790e-04 -1.26342568e-04 -2.35846189e-04]
+ [ 5.13379785e-04  1.52568674e-04  3.46613327e-04]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01443299 -0.02003814  0.01616276]
+ [-0.03883917 -0.02892706  0.04164947]
+ [-0.02557087  0.0113195   0.01719166]
+ [-0.03141659 -0.04776761  0.04160226]
+ [-0.04252736  0.04999803 -0.03895429]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[-0.03405193 -0.03474491 -0.0191281  -0.05946632  0.00171801 -0.06322877]
+ [ 0.0679119  -0.00149973  0.01230358  0.07574528 -0.00773658  0.07061674]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++
+Now training on 
+[1. 0. 0.]
+which has a shape of:  (3,)
+where the target is: 0
+this makes the target vector the following,
+[0.9 0.1]
+
+******************************
+the length of inputs is  (3,)
+by using the following input,
+[1. 0. 0.]
+the network predicted the following:
+hidden activations:
+ [1.         0.50360819 0.49029143 0.49360763 0.4921465  0.48936976]
+output predictions:
+ [0.46994182 0.5352732 ]
+******************************
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+now generating the k error term vector
+the result of the target vector minus the output vector is:
+[ 0.43005818 -0.4352732 ]
+with a shape of:  (2,)
+1-K:
+[0.53005818 0.4647268 ]
+the result of the first element-wise multiplication is:
+[ 0.22795585 -0.20228312]
+with a shape of:  (2,)
+the result of the second element-wise multiplication is:
+[ 0.10712599 -0.10827673]
+with a shape of:  (2,)
+
+now generating the j error term vector
+the result of the target vector minus the output vector is:
+[-0.01100112 -0.0035597  -0.00338131 -0.01457184  0.00102174 -0.01441959]
+with a shape of:  (6,)
+1-J:
+[0.         0.49639181 0.50970857 0.50639237 0.5078535  0.51063024]
+the result of the first element-wise multiplication is:
+[-0.         -0.001767   -0.00172348 -0.00737907  0.00051889 -0.00736308]
+with a shape of:  (6,)
+the result of the second element-wise multiplication is:
+[-0.         -0.00088988 -0.00084501 -0.00364236  0.00025537 -0.00360327]
+with a shape of:  (6,)
+
+Now calculating the adjestments to the output weights
+the previous delta ouput weight matrix:
+[[-0.02445359 -0.01234521 -0.01210622 -0.01215354 -0.01211965 -0.01189653]
+ [ 0.02383741  0.01203442  0.01180232  0.01184818  0.01181506  0.01159611]]
+after scaling by the momentum
+[[-0.02200823 -0.01111069 -0.0108956  -0.01093818 -0.01090768 -0.01070688]
+ [ 0.02145367  0.01083097  0.01062209  0.01066336  0.01063355  0.0104365 ]]
+scaling the k error vector by the learning rate
+[ 0.0107126  -0.01082767]
+the outer multiply of k error vector and the hidden activiations is:
+[[ 0.0107126   0.00539495  0.0052523   0.00528782  0.00527217  0.00524242]
+ [-0.01082767 -0.0054529  -0.00530872 -0.00534462 -0.0053288  -0.00529874]]
+the final delta matrix for the output weights:
+[[-0.01129563 -0.00571573 -0.00564331 -0.00565036 -0.00563552 -0.00546446]
+ [ 0.01062599  0.00537807  0.00531337  0.00531874  0.00530475  0.00513776]]
+with a shape of:  (2, 6)
+
+Now calculating the adjestments to the hidden unit weights
+the previous delta hidden unit weight matrix:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.00734746e-04 -4.53330754e-05 -6.59336350e-05]
+ [-1.07975375e-04 -4.71347404e-05 -7.02849923e-05]
+ [ 5.15295569e-04  1.52920085e-04  3.47977119e-04]
+ [-3.55046790e-04 -1.26342568e-04 -2.35846189e-04]
+ [ 5.13379785e-04  1.52568674e-04  3.46613327e-04]]
+after scaling by the momentum
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-9.06612715e-05 -4.07997679e-05 -5.93402715e-05]
+ [-9.71778379e-05 -4.24212664e-05 -6.32564931e-05]
+ [ 4.63766012e-04  1.37628077e-04  3.13179407e-04]
+ [-3.19542111e-04 -1.13708312e-04 -2.12261570e-04]
+ [ 4.62041806e-04  1.37311807e-04  3.11951994e-04]]
+scaling the j error vector by the learning rate
+[-0.00000000e+00 -8.89878015e-05 -8.45008348e-05 -3.64236458e-04
+  2.55370851e-05 -3.60326917e-04]
+the outer multiply of j error vector and the inputs is:
+[[-0.00000000e+00 -0.00000000e+00 -0.00000000e+00]
+ [-8.89878015e-05 -0.00000000e+00 -0.00000000e+00]
+ [-8.45008348e-05 -0.00000000e+00 -0.00000000e+00]
+ [-3.64236458e-04 -0.00000000e+00 -0.00000000e+00]
+ [ 2.55370851e-05  0.00000000e+00  0.00000000e+00]
+ [-3.60326917e-04 -0.00000000e+00 -0.00000000e+00]]
+the final delta matrix for the hidden unit weights:
+[[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.79649073e-04 -4.07997679e-05 -5.93402715e-05]
+ [-1.81678673e-04 -4.24212664e-05 -6.32564931e-05]
+ [ 9.95295543e-05  1.37628077e-04  3.13179407e-04]
+ [-2.94005026e-04 -1.13708312e-04 -2.12261570e-04]
+ [ 1.01714889e-04  1.37311807e-04  3.11951994e-04]]
+with a shape of:  (6, 3)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to be updated to:
+Hidden Weight Matrix
+[[ 1.          0.          0.        ]
+ [ 0.01425334 -0.02007894  0.01610342]
+ [-0.03902085 -0.02896948  0.04158621]
+ [-0.02547134  0.01145713  0.01750484]
+ [-0.0317106  -0.04788132  0.04139   ]
+ [-0.04242565  0.05013534 -0.03864234]]
+The size of the hidden weight matrix is:  (6, 3)
+Output Weight Matrix
+[[-0.04534756 -0.04046065 -0.02477141 -0.06511669 -0.0039175  -0.06869323]
+ [ 0.07853789  0.00387834  0.01761695  0.08106402 -0.00243183  0.07575451]]
+The size of the hidden weight matrix is:  (2, 6)
++++++++++++++++++++++++++++++++
+
+finding Accuracy
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1. 1. 0.]]
+compared to this target array
+[0]
+
+******************************
+the length of inputs is  (1, 3)
+by using the following input,
+[[1. 1. 0.]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.49854361 0.48300896 0.49649651 0.48011252 0.50192741]]
+output predictions:
+ [[0.46352147 0.54142589]]
+******************************
+
+
+-----------------------------
+incrementing target: 0  and predicted: 0.5414258881983142 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 0.]]
+-----------------------------
+
+this gives tp count of  0.0 out of  1 for an accuracy of  0.0
+///////////////////////////////
+
+
+///////////////////////////////
+Now calculating the accuracy of the network on the following data:
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+compared to this target array
+[1 1 0]
+
+******************************
+the length of inputs is  (3, 3)
+by using the following input,
+[[1.  0.5 0.5]
+ [1.  0.  0.5]
+ [1.  0.  0. ]]
+the network predicted the following:
+hidden activations:
+ [[1.         0.50306636 0.49182261 0.49725244 0.49126183 0.49083124]
+ [1.         0.50557603 0.49544319 0.49582037 0.49724613 0.4845682 ]
+ [1.         0.50356328 0.49024603 0.49363251 0.49207301 0.48939518]]
+output predictions:
+ [[0.46358812 0.54126857]
+ [0.46366491 0.54113658]
+ [0.46367519 0.54116179]]
+******************************
+
+
+-----------------------------
+incrementing target: 1  and predicted: 0.5412685692027409 at index  1
+incrementing target: 1  and predicted: 0.5411365768871839 at index  1
+incrementing target: 0  and predicted: 0.541161786144582 at index  1
+the generated confusion matrix is:
+[[0. 1.]
+ [0. 2.]]
+-----------------------------
+
+this gives tp count of  2.0 out of  3 for an accuracy of  0.6666666666666666
+///////////////////////////////
+
